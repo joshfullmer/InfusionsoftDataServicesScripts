@@ -1,7 +1,7 @@
 """
 This application will download all of the file attachments
 connected to contacts (not emails, or company files)
-and put all of those files into a ZIP file.
+and puts all of those files into a ZIP file.
 
 The ZIP file will also have a "files.csv" which will outline
 all of the other details about the files, including who they were
