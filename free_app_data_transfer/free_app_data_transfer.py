@@ -71,13 +71,17 @@ for contact in contacts:
         continue
     for key in contact_fields:
         if rename_mapping.get(key):
-            contact[rename_mapping[key]] = contact.get(key)
-            if contact.get(key):
-                del contact[key]
+            contact[rename_mapping[key]] = contact.pop(key, None)
     contact[src_contact_id] = str(contact['Id'])
     contact = {k: v for k, v in contact.items() if (v and v != 'null')}
     created_contact_id = dest_infusionsoft.ContactService('add', contact)
     print("Contact created!  Contact ID:"
           " {} - {} {}".format(created_contact_id,
-                               contact['FirstName'],
-                               contact['LastName']))
+                               contact.get('FirstName'),
+                               contact.get('LastName')))
+
+# TODO
+# Determine which tags need to be created (based on contacts imported)
+# Create tags from above determination
+# Apply tags to contacts
+tags = get_table(src_infusionsoft, 'ContactGroupAssign')
