@@ -71,5 +71,12 @@ def create_custom_field(infusionsoft, fieldname, tablename='Contact',
     else:
         field['Id'] = existing_field[0]['Id']
         field['Name'] = "_" + existing_field[0]['Name']
-        print("Field {} already exists.\n".format(field['Name']))
+        print("Field {} already exists.".format(field['Name']))
     return field
+
+
+def delete_table(infusionsoft, tablename):
+    print("Deleting \"{}\" table".format(tablename))
+    for record in get_table(infusionsoft, tablename):
+        infusionsoft.DataService('delete', tablename, record['Id'])
+    print("\"{}\" table deleted".format(tablename))
