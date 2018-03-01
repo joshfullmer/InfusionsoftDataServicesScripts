@@ -18,10 +18,10 @@ from infusionsoft.library import Infusionsoft
 from constants import (QJ154_APIKEY, TE361_APIKEY, FIELDS, DATATYPES)
 from infusionsoft_actions import get_table, create_custom_field
 
-SOURCE_APPNAME = 'qj154'
-SOURCE_API_KEY = QJ154_APIKEY
-DESTINATION_APPNAME = 'te361'
-DESTINATION_API_KEY = TE361_APIKEY
+SOURCE_APPNAME = 'qj154'  # 'qj154'
+SOURCE_API_KEY = QJ154_APIKEY  # QJ154_APIKEY
+DESTINATION_APPNAME = 'te361'  # 'te361'
+DESTINATION_API_KEY = TE361_APIKEY  # TE361_APIKEY
 
 CONTACTS_WITH_TAG_IDS = []
 
