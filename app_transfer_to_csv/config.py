@@ -27,4 +27,9 @@ TASKS_APPOINTMENTS = True
 OPPORTUNITIES = True
 ORDERS = True
 SUBSCRIPTIONS = True
-SUBSCRIPTION_CUT_OFF_DATE = "2018/01/01"
+# This will shift the next bill dates of subscriptions if the customer
+# needs time in their old app to cancel subscriptions.  No subscriptions will
+# bill before the cutoff date you specify below
+
+# Format: "YYYY/MM/DD"
+SUBSCRIPTION_CUT_OFF_DATE = '2018/04/05'

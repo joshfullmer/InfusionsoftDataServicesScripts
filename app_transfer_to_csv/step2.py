@@ -9,9 +9,12 @@ Step 2 generates up to 6 CSVs:
 
 """
 import datetime
+from dateutil.relativedelta import relativedelta
 import csv
+import glob
 import json
 import os
+import zipfile
 
 from infusionsoft.library import Infusionsoft
 
@@ -341,4 +344,136 @@ if config.ORDERS:
 # =============================================================================
 
 if config.SUBSCRIPTIONS:
-    pass
+    subscriptions = get_table(
+        src_infusionsoft,
+        'RecurringOrder')
+
+    credit_cards = {}
+    for cc in get_table(
+            src_infusionsoft,
+            'CreditCard',
+            {},
+            ['Id',
+             'ContactId',
+             'Last4',
+             'ExpirationMonth',
+             'ExpirationYear',
+             'NameOnCard']):
+        key = "{} - {} - {}/{} - {}".format(
+            contact_relationship.get(cc.get('ContactId')),
+            cc.get('Last4'),
+            cc.get('ExpirationMonth'),
+            cc.get('ExpirationYear'),
+            cc.get('NameOnCard'))
+        credit_cards[key] = cc['Id']
+
+    cc_relationship = {}
+    for cc in get_table(
+            dest_infusionsoft,
+            'CreditCard',
+            {},
+            ['Id',
+             'ContactId',
+             'Last4',
+             'ExpirationMonth',
+             'ExpirationYear',
+             'NameOnCard']):
+        key = "{} - {} - {}/{} - {}".format(
+            cc.get('ContactId'),
+            cc.get('Last4'),
+            cc.get('ExpirationMonth'),
+            cc.get('ExpirationYear'),
+            cc.get('NameOnCard'))
+        if credit_cards.get(key):
+            cc_relationship[credit_cards[key]] = cc['Id']
+
+    fieldnames = [
+        'ContactId',
+        'SubscriptionPlanId',
+        'ProductId',
+        'ProgramId',
+        'CC1',
+        'PaymentGatewayId',
+        'Frequency',
+        'BillingCycle',
+        'BillingAmt',
+        'PromoCode',
+        'Status',
+        'StartDate',
+        'EndDate',
+        'ReasonStopped',
+        'PaidThruDate',
+        'NextBillDate',
+        'AutoCharge',
+        'MaxRetry',
+        'NumDaysBetweenRetry']
+
+    with open("{}subscriptions.csv".format(dir_path),
+              'w',
+              newline='') as csvfile:
+        writer = csv.DictWriter(
+            csvfile,
+            fieldnames=fieldnames,
+            extrasaction='ignore')
+        writer.writeheader()
+
+        for sub in subscriptions:
+            if not contact_relationship.get(sub['ContactId']):
+                continue
+            sub['ContactId'] = contact_relationship.get(sub.get('ContactId'))
+            sub['SubscriptionPlanId'] = sub_plan_relationship.get(sub.get(
+                'SubscriptionPlanId'))
+            sub['ProductId'] = product_relationship.get(sub.get('ProductId'))
+            sub['ProgramId'] = sub_plan_relationship.get(sub.get('ProgramId'))
+            if cc_relationship.get(sub.get('CC1')):
+                sub['CC1'] = cc_relationship.get(sub.get('CC1'))
+            elif cc_relationship.get(sub.get('CC2')):
+                sub['CC2'] = cc_relationship.get(sub.get('CC2'))
+            else:
+                sub['CC1'] = 0
+            sub['PaymentGatewayId'] = "SEE DESTINATION APP"
+            if sub.get('AutoCharge') == 1:
+                sub['AutoCharge'] = 'Yes'
+            else:
+                sub['AutoCharge'] = 'No'
+            sub = convert_dict_dates_to_string(sub)
+
+            pay_date_shift = relativedelta()
+            if sub['BillingCycle'] == '1':
+                pay_date_shift.years = sub.get('Frequency')
+            elif sub['BillingCycle'] == '2':
+                pay_date_shift.months = sub.get('Frequency')
+            elif sub['BillingCycle'] == '3':
+                pay_date_shift.weeks = sub.get('Frequency')
+            elif sub['BillingCycle'] == '6':
+                pay_date_shift.days = sub.get('Frequency')
+
+            if not sub.get('PaidThruDate') and sub.get('NextBillDate'):
+                sub['PaidThruDate'] = sub.get('NextBillDate') - pay_date_shift
+
+            if config.SUBSCRIPTION_CUT_OFF_DATE:
+                cut_off = datetime.datetime.strptime(
+                    config.SUBSCRIPTION_CUT_OFF_DATE,
+                    '%Y/%m/%d')
+                if (sub.get('NextBillDate') <= cut_off and
+                        sub['Status'] == 'Active'):
+                    while sub.get('PaidThruDate') <= cut_off:
+                        sub['PaidThruDate'] = (sub.get('PaidThruDate') +
+                                               pay_date_shift)
+            writer.writerow(sub)
+
+# ZIPFILE
+# =============================================================================
+
+# Generate ZIP file for all csvs created, then delete the CSVs
+zipf = zipfile.ZipFile("{}{}_to_{}_step2.zip".format(
+    dir_path,
+    config.SOURCE_APPNAME,
+    config.DESTINATION_APPNAME), 'w')
+
+for name in glob.glob("{}*.csv".format(dir_path)):
+    zipf.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
+    try:
+        os.remove(name)
+    except OSError:
+        pass
