@@ -9,9 +9,11 @@ Step 1 will also create contact custom fields.
 """
 
 import csv
+import glob
 import json
 import os
 import re
+import zipfile
 
 from infusionsoft.library import Infusionsoft
 
@@ -456,3 +458,16 @@ if config.PRODUCTS:
             'add',
             'ProductCategoryAssign',
             cat_assign)
+
+# Generate ZIP file for all csvs created, then delete the CSVs
+zipf = zipfile.ZipFile("{}{}_to_{}_step1.zip".format(
+    dir_path,
+    config.SOURCE_APPNAME,
+    config.DESTINATION_APPNAME), 'w')
+
+for name in glob.glob("{}*.csv".format(dir_path)):
+    zipf.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
+    try:
+        os.remove(name)
+    except OSError:
+        pass
