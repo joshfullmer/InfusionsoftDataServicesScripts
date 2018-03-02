@@ -22,7 +22,8 @@ PRODUCTS = True
 # doesn't want all of the products transferred.
 # Comma-separated list of IDs.
 PRODUCTS_TO_SKIP = []
-CONTACT_ACTIONS = True
+NOTES = True
+TASKS_APPOINTMENTS = True
 OPPORTUNITIES = True
 ORDERS = True
 SUBSCRIPTIONS = True

@@ -130,6 +130,18 @@ if config.CONTACTS:
              }
         )
 
+    user_relationship = {}
+    for user in get_table(src_infusionsoft,
+                          'User',
+                          {},
+                          ['Id', 'FirstName', 'LastName']):
+        user_relationship[user['Id']] = "{} {}".format(
+            user['FirstName'],
+            user['LastName']
+        )
+    with open("{}user_relationship.json".format(dir_path), 'w') as fp:
+        json.dump(user_relationship, fp)
+
     # Add all contacts to CSV
     num_contacts_created = 0
     emails = []
@@ -174,6 +186,7 @@ if config.CONTACTS:
                 if rename_mapping.get(key):
                     contact[rename_mapping[key]] = contact.pop(key, None)
             contact[src_contact_id] = str(contact['Id'])
+            contact['OwnerId'] = user_relationship[contact['OwnerId']]
             contact['TransferTag'] = "Data from {}".format(
                 config.SOURCE_APPNAME)
             if config.COMPANIES:
