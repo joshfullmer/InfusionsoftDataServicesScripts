@@ -22,7 +22,7 @@ from constants import FIELDS, DATATYPES, OPT_OUT_STATUSES
 from tools import convert_dict_dates_to_string
 from infusionsoft_actions import get_table, create_custom_field
 
-dir_path = "output/{} >> {}/".format(config.SOURCE_APPNAME,
+dir_path = "output/{} -- {}/".format(config.SOURCE_APPNAME,
                                      config.DESTINATION_APPNAME)
 os.makedirs(dir_path, exist_ok=True)
 

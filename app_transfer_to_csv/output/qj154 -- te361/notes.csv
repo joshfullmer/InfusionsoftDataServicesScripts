@@ -1,5 +1,5 @@
-Accepted,OpportunityId,LastUpdatedBy,UserID,LastUpdated,IsAppointment,CreationDate,CompletionDate,CreatedBy,ActionType,ActionDate,ObjectType,ContactId,Id,ActionDescription,Priority,CreationNotes,_SourceAppActionID
-1,0,-1,Josh Fullmer',2014-04-29 01:49:44,0,2014-04-29 00:49:43,2014-04-29 00:49:43,1,UPDATE,2014-04-29 00:49:43,Note,17730,6,Changed Info for order form '3 hole punch order form',3,"This contact was modified on 10/14/2013 2:24 PM because of a discrepancy in data while updating.
+IsAppointment,LastUpdatedBy,UserID,ActionType,Accepted,ActionDate,Id,ContactId,OpportunityId,CreatedBy,CreationNotes,LastUpdated,Priority,CompletionDate,ActionDescription,ObjectType,CreationDate,_SourceAppActionID
+0,-1,Josh Fullmer',UPDATE,1,2014-04-29 00:49:43,6,17730,0,1,"This contact was modified on 10/14/2013 2:24 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=
@@ -18,14 +18,14 @@ Title=
 Suffix=
 FirstName=Josh
 LastName=Fullmer
-STUFFFFFF",6
-1,0,1,0,2013-10-14 14:25:36,0,2013-10-14 14:25:36,2013-10-14 14:25:36,1,UPDATE,2013-10-14 14:25:36,Note,17730,10,Changed Info for order form '3 hole punch order form',3,"This contact was modified on 10/14/2013 2:25 PM because of a discrepancy in data while updating.
+STUFFFFFF",2014-04-29 01:49:44,3,2014-04-29 00:49:43,Changed Info for order form '3 hole punch order form',Note,2014-04-29 00:49:43,6
+0,1,0,UPDATE,1,2013-10-14 14:25:36,10,17730,0,1,"This contact was modified on 10/14/2013 2:25 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=132 street
 Address2Street1=132 street
-",10
-0,0,1,0,2013-10-14 14:25:36,0,2013-10-14 14:25:36,2013-10-14 14:25:36,-1,,2013-10-14 14:25:36,Note,17730,12,Order Form details,3,"An order form (Cha-ching! Somebody bought something.) was submitted with the following information:
+",2013-10-14 14:25:36,3,2013-10-14 14:25:36,Changed Info for order form '3 hole punch order form',Note,2013-10-14 14:25:36,10
+0,1,0,,0,2013-10-14 14:25:36,12,17730,0,-1,"An order form (Cha-ching! Somebody bought something.) was submitted with the following information:
 IP Address: 184.185.173.162
 infusion_name: 3 hole punch order form
 infusion_xid: 35d31dd1425015db57a2bc8a3b0513d9
@@ -55,14 +55,14 @@ CAttempt: false
 Contact0LastName: test
 Contact0FirstName: infusionsoft
 Contact0City: place
-",12
-1,0,1,0,2013-10-14 14:28:19,0,2013-10-14 14:28:19,2013-10-14 14:28:19,1,UPDATE,2013-10-14 14:28:19,Note,17730,14,Changed Info for order form '3 hole punch order form',3,"This contact was modified on 10/14/2013 2:28 PM because of a discrepancy in data while updating.
+",2013-10-14 14:25:36,3,2013-10-14 14:25:36,Order Form details,Note,2013-10-14 14:25:36,12
+0,1,0,UPDATE,1,2013-10-14 14:28:19,14,17730,0,1,"This contact was modified on 10/14/2013 2:28 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 FirstName=Infusionsoft
 LastName=Test
-",14
-0,0,1,0,2013-10-14 14:28:19,0,2013-10-14 14:28:19,2013-10-14 14:28:19,-1,,2013-10-14 14:28:19,Note,17730,16,Order Form details,3,"An order form (Cha-ching! Somebody bought something.) was submitted with the following information:
+",2013-10-14 14:28:19,3,2013-10-14 14:28:19,Changed Info for order form '3 hole punch order form',Note,2013-10-14 14:28:19,14
+0,1,0,,0,2013-10-14 14:28:19,16,17730,0,-1,"An order form (Cha-ching! Somebody bought something.) was submitted with the following information:
 IP Address: 184.185.173.162
 infusion_name: 3 hole punch order form
 infusion_xid: 35d31dd1425015db57a2bc8a3b0513d9
@@ -92,8 +92,8 @@ CAttempt: false
 Contact0LastName: johnson
 Contact0FirstName: jack
 Contact0City: place
-",16
-1,0,1,0,2013-11-21 11:08:22,0,2013-11-21 11:08:22,2013-11-21 11:08:22,1,UPDATE,2013-11-21 11:08:22,Note,17730,18,Changed Info for order form 'Auto-charge Test',3,"This contact was modified on 11/21/2013 11:08 AM because of a discrepancy in data while updating.
+",2013-10-14 14:28:19,3,2013-10-14 14:28:19,Order Form details,Note,2013-10-14 14:28:19,16
+0,1,0,UPDATE,1,2013-11-21 11:08:22,18,17730,0,1,"This contact was modified on 11/21/2013 11:08 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=123 street
@@ -102,8 +102,8 @@ Address2Street1=123 street
 City2=Place
 FirstName=Someone
 LastName=Johnson
-",18
-0,0,1,0,2013-11-21 11:08:24,0,2013-11-21 11:08:24,2013-11-21 11:08:24,-1,,2013-11-21 11:08:24,Note,17730,20,Legacy Order Form details: Failed,3,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
+",2013-11-21 11:08:22,3,2013-11-21 11:08:22,Changed Info for order form 'Auto-charge Test',Note,2013-11-21 11:08:22,18
+0,1,0,,0,2013-11-21 11:08:24,20,17730,0,-1,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
 IP Address: 184.185.173.162
 infusion_name: Auto-charge Test
 infusion_xid: e7662e24b30038100ab25933c10b89d6
@@ -131,8 +131,8 @@ CAttempt:
 Contact0LastName: jones
 Contact0FirstName: somebody
 Contact0City: city
-",20
-0,0,1,0,2013-11-21 11:09:46,0,2013-11-21 11:09:46,2013-11-21 11:09:46,-1,,2013-11-21 11:09:46,Note,17730,22,Legacy Order Form details: Failed,3,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
+",2013-11-21 11:08:24,3,2013-11-21 11:08:24,Legacy Order Form details: Failed,Note,2013-11-21 11:08:24,20
+0,1,0,,0,2013-11-21 11:09:46,22,17730,0,-1,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
 IP Address: 184.185.173.162
 Duplicate Order
 infusion_name: Auto-charge Test
@@ -164,8 +164,8 @@ CAttempt: false
 Contact0LastName: lastname
 Contact0FirstName: person
 Contact0City: city
-",22
-0,0,1,0,2013-11-21 11:10:59,0,2013-11-21 11:10:59,2013-11-21 11:10:59,-1,,2013-11-21 11:10:59,Note,17730,24,Legacy Order Form details,3,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
+",2013-11-21 11:09:46,3,2013-11-21 11:09:46,Legacy Order Form details: Failed,Note,2013-11-21 11:09:46,22
+0,1,0,,0,2013-11-21 11:10:59,24,17730,0,-1,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
 IP Address: 184.185.173.162
 infusion_name: Auto-charge Test
 infusion_xid: e7662e24b30038100ab25933c10b89d6
@@ -193,8 +193,8 @@ CAttempt:
 Contact0LastName: person
 Contact0FirstName: firstname
 Contact0City: city
-",24
-1,0,1,0,2013-11-26 15:39:36,0,2013-11-26 15:39:36,2013-11-26 15:39:36,1,UPDATE,2013-11-26 15:39:36,Note,17730,26,Changed Info for order form 'Test',3,"This contact was modified on 11/26/2013 3:39 PM because of a discrepancy in data while updating.
+",2013-11-21 11:10:59,3,2013-11-21 11:10:59,Legacy Order Form details,Note,2013-11-21 11:10:59,24
+0,1,0,UPDATE,1,2013-11-26 15:39:36,26,17730,0,1,"This contact was modified on 11/26/2013 3:39 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=
@@ -207,8 +207,8 @@ City2=null
 State2=null
 PostalCode2=null
 Country2=null
-",26
-0,0,1,0,2013-11-26 15:39:39,0,2013-11-26 15:39:39,2013-11-26 15:39:39,-1,,2013-11-26 15:39:39,Note,17730,28,Legacy Order Form details,3,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
+",2013-11-26 15:39:36,3,2013-11-26 15:39:36,Changed Info for order form 'Test',Note,2013-11-26 15:39:36,26
+0,1,0,,0,2013-11-26 15:39:39,28,17730,0,-1,"A legacy order form (Cha-ching! Somebody bought something.) was submitted with the following information:
 IP Address: 184.185.173.162
 infusion_name: Test
 infusion_xid: 87788ef8ce8bbd043911b6a8481444bc
@@ -235,8 +235,8 @@ CAttempt:
 Contact0LastName: FULLMER
 Contact0FirstName: JOSH
 Contact0City: city
-",28
-1,0,-1,0,2014-05-12 19:28:29,0,2014-05-12 19:28:29,2014-05-12 19:28:29,-1,UPDATE,2014-05-12 19:28:29,Note,17816,202,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/12/2014 7:28 PM because of a discrepancy in data while updating.
+",2013-11-26 15:39:39,3,2013-11-26 15:39:39,Legacy Order Form details,Note,2013-11-26 15:39:39,28
+0,-1,0,UPDATE,1,2014-05-12 19:28:29,202,17816,0,-1,"This contact was modified on 5/12/2014 7:28 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=
@@ -262,8 +262,8 @@ Title=
 Suffix=
 LastName=Me
 ContactNotes=
-",202
-1,0,1,0,2014-05-12 19:38:49,0,2014-05-12 19:38:49,2014-05-12 19:38:49,1,UPDATE,2014-05-12 19:38:49,Note,17730,204,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/12/2014 7:38 PM because of a discrepancy in data while updating.
+",2014-05-12 19:28:29,3,2014-05-12 19:28:29,Changed Info for Corp Draw Playmat,Note,2014-05-12 19:28:29,202
+0,1,0,UPDATE,1,2014-05-12 19:38:49,204,17730,0,1,"This contact was modified on 5/12/2014 7:38 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone2=(123) 456-7890
@@ -284,8 +284,8 @@ _testestest=
 _Initials=
 _ContactUsComments=
 _NPSComments=
-",204
-1,0,1,0,2014-05-12 19:53:50,0,2014-05-12 19:53:50,2014-05-12 19:53:50,1,UPDATE,2014-05-12 19:53:50,Note,17816,206,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/12/2014 7:53 PM because of a discrepancy in data while updating.
+",2014-05-12 19:38:49,3,2014-05-12 19:38:49,Changed Info for Corp Draw Playmat,Note,2014-05-12 19:38:49,204
+0,1,0,UPDATE,1,2014-05-12 19:53:50,206,17816,0,1,"This contact was modified on 5/12/2014 7:53 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(480) 276-5071
@@ -294,8 +294,8 @@ StreetAddress1=1333 W Guadalupe Rd #327
 State=ARIZONA
 Address2Street1=1333 W Guadalupe Rd #327
 State2=ARIZONA
-",206
-1,0,1,0,2014-05-13 10:52:38,0,2014-05-13 10:52:38,2014-05-13 10:52:38,1,UPDATE,2014-05-13 10:52:38,Note,17816,208,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/13/2014 10:52 AM because of a discrepancy in data while updating.
+",2014-05-12 19:53:50,3,2014-05-12 19:53:50,Changed Info for Corp Draw Playmat,Note,2014-05-12 19:53:50,206
+0,1,0,UPDATE,1,2014-05-13 10:52:38,208,17816,0,1,"This contact was modified on 5/13/2014 10:52 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(132) 456-7890
@@ -306,16 +306,16 @@ PostalCode=85233
 City2=Gilbert
 State2=AZ
 PostalCode2=85233
-",208
-1,0,-1,0,2014-05-14 14:25:47,0,2014-05-14 14:25:47,2014-05-14 14:25:47,-1,UPDATE,2014-05-14 14:25:47,Note,17816,210,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/14/2014 2:25 PM because of a discrepancy in data while updating.
+",2014-05-13 10:52:38,3,2014-05-13 10:52:38,Changed Info for Corp Draw Playmat,Note,2014-05-13 10:52:38,208
+0,-1,0,UPDATE,1,2014-05-14 14:25:47,210,17816,0,-1,"This contact was modified on 5/14/2014 2:25 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=1333 w guadalupe rd
 PostalCode=82222
 Address2Street1=1333 w guadalupe rd
 PostalCode2=82222
-",210
-1,0,-1,0,2014-05-14 14:28:15,0,2014-05-14 14:28:15,2014-05-14 14:28:15,-1,UPDATE,2014-05-14 14:28:15,Note,17816,212,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/14/2014 2:28 PM because of a discrepancy in data while updating.
+",2014-05-14 14:25:47,3,2014-05-14 14:25:47,Changed Info for Corp Draw Playmat,Note,2014-05-14 14:25:47,210
+0,-1,0,UPDATE,1,2014-05-14 14:28:15,212,17816,0,-1,"This contact was modified on 5/14/2014 2:28 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(123) 456-7890
@@ -328,8 +328,8 @@ Address2Street1=123 place
 City2=city
 State2=STATE
 PostalCode2=85233
-",212
-1,0,-1,0,2014-05-14 14:37:24,0,2014-05-14 14:37:24,2014-05-14 14:37:24,-1,UPDATE,2014-05-14 14:37:24,Note,17816,214,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/14/2014 2:37 PM because of a discrepancy in data while updating.
+",2014-05-14 14:28:15,3,2014-05-14 14:28:15,Changed Info for Corp Draw Playmat,Note,2014-05-14 14:28:15,212
+0,-1,0,UPDATE,1,2014-05-14 14:37:24,214,17816,0,-1,"This contact was modified on 5/14/2014 2:37 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(132) 456-8790
@@ -338,8 +338,8 @@ City=123
 State=AZ
 City2=123
 State2=AZ
-",214
-1,0,1,0,2014-05-14 14:39:54,0,2014-05-14 14:39:54,2014-05-14 14:39:54,1,UPDATE,2014-05-14 14:39:54,Note,17816,216,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/14/2014 2:39 PM because of a discrepancy in data while updating.
+",2014-05-14 14:37:24,3,2014-05-14 14:37:24,Changed Info for Corp Draw Playmat,Note,2014-05-14 14:37:24,214
+0,1,0,UPDATE,1,2014-05-14 14:39:54,216,17816,0,1,"This contact was modified on 5/14/2014 2:39 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=123
@@ -349,8 +349,8 @@ Address2Street1=123
 City2=city
 State2=STATE
 FirstName=Josh
-",216
-1,0,-1,0,2014-05-14 14:52:35,0,2014-05-14 14:52:35,2014-05-14 14:52:35,-1,UPDATE,2014-05-14 14:52:35,Note,17730,218,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/14/2014 2:52 PM because of a discrepancy in data while updating.
+",2014-05-14 14:39:54,3,2014-05-14 14:39:54,Changed Info for Corp Draw Playmat,Note,2014-05-14 14:39:54,216
+0,-1,0,UPDATE,1,2014-05-14 14:52:35,218,17730,0,-1,"This contact was modified on 5/14/2014 2:52 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(480) 276-5071
@@ -367,8 +367,8 @@ City2=gilbert
 State2=az
 PostalCode2=85233
 ZipFour2=
-",218
-1,0,-1,0,2014-05-15 12:32:56,0,2014-05-15 12:32:56,2014-05-15 12:32:56,-1,UPDATE,2014-05-15 12:32:56,Note,17730,222,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/15/2014 12:32 PM because of a discrepancy in data while updating.
+",2014-05-14 14:52:35,3,2014-05-14 14:52:35,Changed Info for Corp Draw Playmat,Note,2014-05-14 14:52:35,218
+0,-1,0,UPDATE,1,2014-05-15 12:32:56,222,17730,0,-1,"This contact was modified on 5/15/2014 12:32 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=12345670
@@ -379,31 +379,31 @@ State=STATE
 Address2Street1=stuff
 City2=city
 State2=STATE
-",222
-1,0,-1,0,2014-05-17 04:24:25,0,2014-05-17 04:24:25,2014-05-17 04:24:25,-1,UPDATE,2014-05-17 04:24:25,Note,17838,224,Changed Info for Corp Draw Playmat,3,"This contact was modified on 5/17/2014 4:24 AM because of a discrepancy in data while updating.
+",2014-05-15 12:32:56,3,2014-05-15 12:32:56,Changed Info for Corp Draw Playmat,Note,2014-05-15 12:32:56,222
+0,-1,0,UPDATE,1,2014-05-17 04:24:25,224,17838,0,-1,"This contact was modified on 5/17/2014 4:24 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(602) 370-2173
 Phone2=(602) 370-2173
 State=AZ
 State2=AZ
-",224
-1,0,1,0,2014-05-22 18:23:57,0,2014-05-22 18:23:57,2014-05-22 18:23:57,1,UPDATE,2014-05-22 18:23:57,Note,17730,226,Changed Info for stapler order form,3,"This contact was modified on 5/22/2014 6:23 PM because of a discrepancy in data while updating.
+",2014-05-17 04:24:25,3,2014-05-17 04:24:25,Changed Info for Corp Draw Playmat,Note,2014-05-17 04:24:25,224
+0,1,0,UPDATE,1,2014-05-22 18:23:57,226,17730,0,1,"This contact was modified on 5/22/2014 6:23 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(123) 456-7980
 StreetAddress1=Test
 City=Test
 State=TEST
-",226
-1,0,1,0,2014-06-05 11:31:43,0,2014-06-05 11:31:43,2014-06-05 11:31:43,1,UPDATE,2014-06-05 11:31:43,Note,17730,230,Changed Info for eBook,3,"This contact was modified on 6/5/2014 11:31 AM because of a discrepancy in data while updating.
+",2014-05-22 18:23:57,3,2014-05-22 18:23:57,Changed Info for stapler order form,Note,2014-05-22 18:23:57,226
+0,1,0,UPDATE,1,2014-06-05 11:31:43,230,17730,0,1,"This contact was modified on 6/5/2014 11:31 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=Adress
 State=state
-",230
-1,0,1,Josh Fullmer',2014-06-24 11:40:02,0,2014-06-24 11:40:02,2014-06-24 11:40:02,1,Call,2014-06-24 11:40:02,Note,17730,234,stuff,3,things,234
-1,0,1,0,2014-06-27 12:09:16,0,2014-06-27 12:09:16,2014-06-27 12:09:16,1,UPDATE,2014-06-27 12:09:16,Note,17730,236,Changed Info for health bars,3,"This contact was modified on 6/27/2014 12:09 PM because of a discrepancy in data while updating.
+",2014-06-05 11:31:43,3,2014-06-05 11:31:43,Changed Info for eBook,Note,2014-06-05 11:31:43,230
+0,1,Josh Fullmer',Call,1,2014-06-24 11:40:02,234,17730,0,1,things,2014-06-24 11:40:02,3,2014-06-24 11:40:02,stuff,Note,2014-06-24 11:40:02,234
+0,1,0,UPDATE,1,2014-06-27 12:09:16,236,17730,0,1,"This contact was modified on 6/27/2014 12:09 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone2=(123) 456-7980
@@ -412,8 +412,8 @@ Phone2Ext=
 Address2Street1=test
 City2=test
 State2=TEST
-",236
-0,0,1,0,2014-07-30 16:50:09,0,2014-07-30 16:50:09,2014-07-30 16:50:09,-1,,2014-07-30 16:50:09,Note,17730,306,Order Form details: Failed,3,"An order form (Cha-ching! Somebody bought something.) was submitted with the following information:
+",2014-06-27 12:09:16,3,2014-06-27 12:09:16,Changed Info for health bars,Note,2014-06-27 12:09:16,236
+0,1,0,,0,2014-07-30 16:50:09,306,17730,0,-1,"An order form (Cha-ching! Somebody bought something.) was submitted with the following information:
 IP Address: 70.166.189.38
 Affiliate: 
 PurchaseType: A
@@ -428,11 +428,11 @@ DupCheckOption: Email
 LeadAffiliate: 
 Submit: Next
 step: 4
-",306
-1,0,1,Josh Fullmer',2014-08-08 11:48:26,0,2014-08-08 11:48:26,2014-08-08 11:48:26,1,Email,2014-08-08 11:48:26,Note,17778,324,stuff,3,things,324
-1,0,1,-1,2014-08-21 13:32:41,0,2014-08-21 13:32:41,2014-08-21 13:32:41,-1,Call,2014-08-21 13:32:41,Note,17730,382,TEST,3,TEST,382
-1,0,1,-1,2014-08-21 13:33:50,0,2014-08-21 13:33:50,2014-08-21 13:33:50,-1,Call,2014-08-21 13:33:50,Note,17730,384,TEST,3,TEST,384
-1,0,1,0,2014-08-29 13:45:04,0,2014-08-29 13:45:04,2014-08-29 13:45:04,1,UPDATE,2014-08-29 13:45:04,Note,17730,414,Changed Info for TEST,3,"This contact was modified on 8/29/2014 1:45 PM because of a discrepancy in data while updating.
+",2014-07-30 16:50:09,3,2014-07-30 16:50:09,Order Form details: Failed,Note,2014-07-30 16:50:09,306
+0,1,Josh Fullmer',Email,1,2014-08-08 11:48:26,324,17778,0,1,things,2014-08-08 11:48:26,3,2014-08-08 11:48:26,stuff,Note,2014-08-08 11:48:26,324
+0,1,-1,Call,1,2014-08-21 13:32:41,382,17730,0,-1,TEST,2014-08-21 13:32:41,3,2014-08-21 13:32:41,TEST,Note,2014-08-21 13:32:41,382
+0,1,-1,Call,1,2014-08-21 13:33:50,384,17730,0,-1,TEST,2014-08-21 13:33:50,3,2014-08-21 13:33:50,TEST,Note,2014-08-21 13:33:50,384
+0,1,0,UPDATE,1,2014-08-29 13:45:04,414,17730,0,1,"This contact was modified on 8/29/2014 1:45 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(123) 456-7890
@@ -440,21 +440,21 @@ Phone1Type=Work
 Phone1Ext=
 StreetAddress1=123 place
 State=AZ
-",414
-1,0,1,0,2014-10-09 11:02:52,0,2014-10-09 11:02:52,2014-10-09 11:02:52,1,UPDATE,2014-10-09 11:02:52,Note,17730,486,Changed Info for Direct to Hidden Field Thank You Page,3,"This contact was modified on 10/9/2014 11:02 AM because of a discrepancy in data while updating.
+",2014-08-29 13:45:04,3,2014-08-29 13:45:04,Changed Info for TEST,Note,2014-08-29 13:45:04,414
+0,1,0,UPDATE,1,2014-10-09 11:02:52,486,17730,0,1,"This contact was modified on 10/9/2014 11:02 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 StreetAddress1=123
 FirstName=Joshtest
-",486
-1,0,-1,0,2014-12-05 12:24:05,0,2014-12-05 12:24:05,2014-12-05 12:24:05,-1,UPDATE,2014-12-05 12:24:05,Note,17730,490,Changed Info for Custom Field,3,"This contact was modified on 12/5/2014 12:24 PM because of a discrepancy in data while updating.
+",2014-10-09 11:02:52,3,2014-10-09 11:02:52,Changed Info for Direct to Hidden Field Thank You Page,Note,2014-10-09 11:02:52,486
+0,-1,0,UPDATE,1,2014-12-05 12:24:05,490,17730,0,-1,"This contact was modified on 12/5/2014 12:24 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=123457980
 State=state
 _CUSTOMFIELD=null
-",490
-1,0,1,0,2015-02-03 09:55:57,0,2015-02-03 09:55:57,2015-02-03 09:55:57,1,UPDATE,2015-02-03 09:55:57,Note,17730,496,Changed Info for Hide Phone Number,3,"This contact was modified on 2/3/2015 9:55 AM because of a discrepancy in data while updating.
+",2014-12-05 12:24:05,3,2014-12-05 12:24:05,Changed Info for Custom Field,Note,2014-12-05 12:24:05,490
+0,1,0,UPDATE,1,2015-02-03 09:55:57,496,17730,0,1,"This contact was modified on 2/3/2015 9:55 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(123) 456-7890
@@ -465,28 +465,28 @@ Phone2Type=Work
 Phone2Ext=
 PostalCode=85233
 ZipFour1=
-",496
-1,0,1,0,2015-02-04 10:04:49,0,2015-02-04 10:04:49,2015-02-04 10:04:49,1,UPDATE,2015-02-04 10:04:49,Note,17730,500,Changed Info for Hide Phone Number,3,"This contact was modified on 2/4/2015 10:04 AM because of a discrepancy in data while updating.
+",2015-02-03 09:55:57,3,2015-02-03 09:55:57,Changed Info for Hide Phone Number,Note,2015-02-03 09:55:57,496
+0,1,0,UPDATE,1,2015-02-04 10:04:49,500,17730,0,1,"This contact was modified on 2/4/2015 10:04 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 State=AZ
 State2=AZ
-",500
-1,0,1,0,2015-03-02 11:34:07,0,2015-03-02 11:34:07,2015-03-02 11:34:07,1,UPDATE,2015-03-02 11:34:07,Note,17730,508,Changed Info for Payment Plan Auto-select,3,"This contact was modified on 3/2/2015 11:34 AM because of a discrepancy in data while updating.
+",2015-02-04 10:04:49,3,2015-02-04 10:04:49,Changed Info for Hide Phone Number,Note,2015-02-04 10:04:49,500
+0,1,0,UPDATE,1,2015-03-02 11:34:07,508,17730,0,1,"This contact was modified on 3/2/2015 11:34 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=555-5555
 Phone1Type=Work
 Phone1Ext=
 State=STATE
-",508
-1,0,1,0,2015-03-26 12:42:43,0,2015-03-26 12:42:43,2015-03-26 12:42:43,1,UPDATE,2015-03-26 12:42:43,Note,17730,590,Changed Info for Payment Plan Auto-select,3,"This contact was modified on 3/26/2015 12:42 PM because of a discrepancy in data while updating.
+",2015-03-02 11:34:07,3,2015-03-02 11:34:07,Changed Info for Payment Plan Auto-select,Note,2015-03-02 11:34:07,508
+0,1,0,UPDATE,1,2015-03-26 12:42:43,590,17730,0,1,"This contact was modified on 3/26/2015 12:42 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 State=AZ
-",590
-1,0,1,Josh Fullmer',2015-06-22 11:37:23,0,2015-06-22 11:37:23,2015-06-22 11:37:23,1,Call,2015-06-22 11:37:23,Note,17730,598,TEST,3,,598
-1,0,-1,0,2015-06-30 16:49:40,0,2015-06-30 16:49:40,2015-06-30 16:49:40,-1,UPDATE,2015-06-30 16:49:40,Note,17730,602,Changed Info for Deleted promo code,3,"This contact was modified on 6/30/2015 4:49 PM because of a discrepancy in data while updating.
+",2015-03-26 12:42:43,3,2015-03-26 12:42:43,Changed Info for Payment Plan Auto-select,Note,2015-03-26 12:42:43,590
+0,1,Josh Fullmer',Call,1,2015-06-22 11:37:23,598,17730,0,1,,2015-06-22 11:37:23,3,2015-06-22 11:37:23,TEST,Note,2015-06-22 11:37:23,598
+0,-1,0,UPDATE,1,2015-06-30 16:49:40,602,17730,0,-1,"This contact was modified on 6/30/2015 4:49 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(123) 456-7890
@@ -512,9 +512,9 @@ _YOLOPComments=
 _YOLOPChange1=
 _YOLOPChange2=
 _YOLOPChange3=
-",602
-1,0,1,Josh Fullmer',2015-07-21 16:05:42,0,2015-07-21 16:05:42,2015-07-21 16:05:42,1,,2015-07-21 16:05:42,Note,17730,681,Version 43.0.2357.134,3,,681
-1,0,1,0,2016-01-12 09:44:15,0,2016-01-12 09:44:15,2016-01-12 09:44:15,1,UPDATE,2016-01-12 09:44:15,Note,17730,1992,Changed Info for Good looking custom field,3,"This contact was modified on 1/12/2016 9:44 AM because of a discrepancy in data while updating.
+",2015-06-30 16:49:40,3,2015-06-30 16:49:40,Changed Info for Deleted promo code,Note,2015-06-30 16:49:40,602
+0,1,Josh Fullmer',,1,2015-07-21 16:05:42,681,17730,0,1,,2015-07-21 16:05:42,3,2015-07-21 16:05:42,Version 43.0.2357.134,Note,2015-07-21 16:05:42,681
+0,1,0,UPDATE,1,2016-01-12 09:44:15,1992,17730,0,1,"This contact was modified on 1/12/2016 9:44 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(123) 456-7980
@@ -546,20 +546,20 @@ _YOLOPCommonUses=
 _YOLOPCommonUsesTextArea=
 _Friend1Name=
 _AppointmentCoreContactID=
-",1992
-1,0,1,0,2016-01-12 09:47:15,0,2016-01-12 09:47:15,2016-01-12 09:47:15,1,UPDATE,2016-01-12 09:47:15,Note,17730,1994,Changed Info for Good looking custom field,3,"This contact was modified on 1/12/2016 9:47 AM because of a discrepancy in data while updating.
+",2016-01-12 09:44:15,3,2016-01-12 09:44:15,Changed Info for Good looking custom field,Note,2016-01-12 09:44:15,1992
+0,1,0,UPDATE,1,2016-01-12 09:47:15,1994,17730,0,1,"This contact was modified on 1/12/2016 9:47 AM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 _GoodLookingCustomField=null
-",1994
-1,0,1,0,2016-01-20 15:37:57,0,2016-01-20 15:37:57,2016-01-20 15:37:57,1,UPDATE,2016-01-20 15:37:57,Note,17730,2066,Changed Info for Change Order Form Label,3,"This contact was modified on 1/20/2016 3:37 PM because of a discrepancy in data while updating.
+",2016-01-12 09:47:15,3,2016-01-12 09:47:15,Changed Info for Good looking custom field,Note,2016-01-12 09:47:15,1994
+0,1,0,UPDATE,1,2016-01-20 15:37:57,2066,17730,0,1,"This contact was modified on 1/20/2016 3:37 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(123) 456-7890
 State=AZ
-",2066
-1,0,-1,Josh Fullmer',2016-03-04 10:24:49,0,2016-03-04 00:00:00,2016-03-01 00:00:00,1,,2016-02-29 00:00:00,Note,17730,2514,User ID Test,1,Sid the Sloth,2514
-1,0,1,0,2016-05-17 17:14:28,0,2016-05-17 17:14:28,2016-05-17 17:14:28,1,UPDATE,2016-05-17 17:14:28,Note,17730,3216,Changed Info for Mobile Form,3,"This contact was modified on 5/17/2016 5:14 PM because of a discrepancy in data while updating.
+",2016-01-20 15:37:57,3,2016-01-20 15:37:57,Changed Info for Change Order Form Label,Note,2016-01-20 15:37:57,2066
+0,-1,Josh Fullmer',,1,2016-02-29 00:00:00,2514,17730,0,1,Sid the Sloth,2016-03-04 10:24:49,1,2016-03-01 00:00:00,User ID Test,Note,2016-03-04 00:00:00,2514
+0,1,0,UPDATE,1,2016-05-17 17:14:28,3216,17730,0,1,"This contact was modified on 5/17/2016 5:14 PM because of a discrepancy in data while updating.
 
 OLD INFORMATION:
 Phone1=(132) 456-7980
@@ -587,9 +587,9 @@ _YOLOPCommonUsesTextArea=
 _Friend1Name=
 _AppointmentCoreContactID=
 _FKID=
-",3216
-1,0,1,296,2016-07-22 11:30:26,0,2016-07-22 11:30:26,2016-07-22 11:30:26,1,,2016-07-22 11:30:26,Note,18756,3752,test,3,test,3752
-1,0,1,Josh Fullmer',2016-07-25 17:54:33,0,2016-07-25 17:54:33,2016-07-25 17:54:33,1,Email,2016-07-25 17:54:33,Note,17730,3796,Email History,3,"David,
+",2016-05-17 17:14:28,3,2016-05-17 17:14:28,Changed Info for Mobile Form,Note,2016-05-17 17:14:28,3216
+0,1,296,,1,2016-07-22 11:30:26,3752,18756,0,1,test,2016-07-22 11:30:26,3,2016-07-22 11:30:26,test,Note,2016-07-22 11:30:26,3752
+0,1,Josh Fullmer',Email,1,2016-07-25 17:54:33,3796,17730,0,1,"David,
       
       My apologies for the delayed response.  Do you have time next week to get
       together?  I am available at the following times.
@@ -691,15 +691,15 @@ _FKID=
       &lt;http://fueledschools.com/wordpress/?page_id=736&gt;
       
       
-      *Fueling Schools with the Power of Human Relationships*",3796
-0,0,1,0,2016-12-19 19:37:30,0,2016-12-19 19:37:30,2016-12-19 19:37:30,1,,,Note,18958,4872,Hello,3,Josh Fullmer,4872
-0,0,1,0,2016-12-19 19:56:24,0,2016-12-19 19:56:24,2016-12-19 19:56:24,1,,,Note,18958,4874,Email: RE: Snaptech,3,"From: octavio@snaptech.com  To: cboycott@adventures-abroad.com, rlockhart@adventures-abroad.com  cc: jmukerji@adventures-abroad.com Received: 13/02/2014 2:18:02 PM Subject: RE: Snaptech  Hi Chris   Thanks for getting back to me and congratulations on the purchase of Bell Tours. I will call Ross or Jai and will be happy to explain to them the work we did for George.   Take care   Octavio    From: CBOYCOTT [mailto:CBoycott@adventures-abroad.com]  Sent: February-13-14 2:01 PM To: Octavio Marquez; Ross Lockhart Cc: Jai Mukerji Subject: RE: Snaptech   Octavio,   Ross Lockhart head of the Hi Tech Division and Jai Mukerji the Business Development Manager are now merging Bell Tours into our larger operation. Their contacts are; Ross Lockhart 604 303 5065 email HYPERLINK &quot;mailto:rlockhart@adventures-abroad.com&quot;rlockhart@adventures-abroad.com Jai Mukerji  604 303 5068 email HYPERLINK &quot;mailto:jmukerji@adventures-abroad.com&quot;jmukerji@adventures-abroad.com   I think what Ross wants to know is exactly what do you do for Bell Tours is it simply hosting ?   Chris Boycott     _____    From: Octavio Marquez [mailto:octavio@snaptechmarketing.com] Sent: Thu 2/13/2014 1:47 PM To: Chris Boycott Subject: Snaptech   Hi Chris   I got a message to call you but when I called your office the receptionist tells me that I am not allowed to leave a message or to call you directly. Feel free to call me when you get a chance.   Thanks   Octavio   HYPERLINK &quot;http://www.snaptech.ca/&quot;http://www.snaptech.ca/emailimages/EmailSigs/logo.jpg Regards, Octavio Marquez President & Co-Founder HYPERLINK &quot;mailto:omarquez@snaptech.com&quot;omarquez@snaptech.com HYPERLINK &quot;http://www.snaptech.com/&quot;www.snaptech.com HYPERLINK &quot;http://www.mkubed.com/&quot;www.mkubed.com  Suite 110 - 2465 Beta Ave. Burnaby BC V5C 5N1 Canada tel 604 677 0742 fax 604 677 5237 toll free US and Canada 1 866 899 4063  Follow us on HYPERLINK &quot;http://www.facebook.com/SnaptechMarketing&quot;Facebook | HYPERLINK &quot;http://www.twitter.com/SnapMarketing&quot;Twitter Read our blogs: HYPERLINK &quot;http://www.snaptech.com/snapblog/&quot;Snaptech | HYPERLINK &quot;http://www.mkubed.com/snapblog/&quot;mKubed   Sales is the single most important function of a company because if there are no sales, all other functions are rendered  irrelevant     Attachments(1): --image001.jpg",4874
-1,0,1,Josh Fullmer',2017-08-04 13:24:10,0,2017-01-27 13:21:21,2017-08-04 13:24:10,1,Email,2017-08-04 13:24:10,Note,17730,5050,Test Custom Field,3,,5050
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,17730,5270,test1,3,body1,5270
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,17730,5272,test2,3,body2,5272
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,17730,5274,test3,3,body3,5274
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,19026,5276,test4,3,body4,5276
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,19026,5278,test5,3,body5,5278
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,19028,5280,test6,3,body6,5280
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,19028,5282,test7,3,body7,5282
-0,0,1,Josh Fullmer',2017-02-22 11:36:47,0,2017-02-22 00:00:00,2017-02-22 11:36:47,1,,,Note,19028,5284,test8,3,body8,5284
+      *Fueling Schools with the Power of Human Relationships*",2016-07-25 17:54:33,3,2016-07-25 17:54:33,Email History,Note,2016-07-25 17:54:33,3796
+0,1,0,,0,,4872,18958,0,1,Josh Fullmer,2016-12-19 19:37:30,3,2016-12-19 19:37:30,Hello,Note,2016-12-19 19:37:30,4872
+0,1,0,,0,,4874,18958,0,1,"From: octavio@snaptech.com  To: cboycott@adventures-abroad.com, rlockhart@adventures-abroad.com  cc: jmukerji@adventures-abroad.com Received: 13/02/2014 2:18:02 PM Subject: RE: Snaptech  Hi Chris   Thanks for getting back to me and congratulations on the purchase of Bell Tours. I will call Ross or Jai and will be happy to explain to them the work we did for George.   Take care   Octavio    From: CBOYCOTT [mailto:CBoycott@adventures-abroad.com]  Sent: February-13-14 2:01 PM To: Octavio Marquez; Ross Lockhart Cc: Jai Mukerji Subject: RE: Snaptech   Octavio,   Ross Lockhart head of the Hi Tech Division and Jai Mukerji the Business Development Manager are now merging Bell Tours into our larger operation. Their contacts are; Ross Lockhart 604 303 5065 email HYPERLINK &quot;mailto:rlockhart@adventures-abroad.com&quot;rlockhart@adventures-abroad.com Jai Mukerji  604 303 5068 email HYPERLINK &quot;mailto:jmukerji@adventures-abroad.com&quot;jmukerji@adventures-abroad.com   I think what Ross wants to know is exactly what do you do for Bell Tours is it simply hosting ?   Chris Boycott     _____    From: Octavio Marquez [mailto:octavio@snaptechmarketing.com] Sent: Thu 2/13/2014 1:47 PM To: Chris Boycott Subject: Snaptech   Hi Chris   I got a message to call you but when I called your office the receptionist tells me that I am not allowed to leave a message or to call you directly. Feel free to call me when you get a chance.   Thanks   Octavio   HYPERLINK &quot;http://www.snaptech.ca/&quot;http://www.snaptech.ca/emailimages/EmailSigs/logo.jpg Regards, Octavio Marquez President & Co-Founder HYPERLINK &quot;mailto:omarquez@snaptech.com&quot;omarquez@snaptech.com HYPERLINK &quot;http://www.snaptech.com/&quot;www.snaptech.com HYPERLINK &quot;http://www.mkubed.com/&quot;www.mkubed.com  Suite 110 - 2465 Beta Ave. Burnaby BC V5C 5N1 Canada tel 604 677 0742 fax 604 677 5237 toll free US and Canada 1 866 899 4063  Follow us on HYPERLINK &quot;http://www.facebook.com/SnaptechMarketing&quot;Facebook | HYPERLINK &quot;http://www.twitter.com/SnapMarketing&quot;Twitter Read our blogs: HYPERLINK &quot;http://www.snaptech.com/snapblog/&quot;Snaptech | HYPERLINK &quot;http://www.mkubed.com/snapblog/&quot;mKubed   Sales is the single most important function of a company because if there are no sales, all other functions are rendered  irrelevant     Attachments(1): --image001.jpg",2016-12-19 19:56:24,3,2016-12-19 19:56:24,Email: RE: Snaptech,Note,2016-12-19 19:56:24,4874
+0,1,Josh Fullmer',Email,1,2017-08-04 13:24:10,5050,17730,0,1,,2017-08-04 13:24:10,3,2017-08-04 13:24:10,Test Custom Field,Note,2017-01-27 13:21:21,5050
+0,1,Josh Fullmer',,0,,5270,17730,0,1,body1,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test1,Note,2017-02-22 00:00:00,5270
+0,1,Josh Fullmer',,0,,5272,17730,0,1,body2,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test2,Note,2017-02-22 00:00:00,5272
+0,1,Josh Fullmer',,0,,5274,17730,0,1,body3,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test3,Note,2017-02-22 00:00:00,5274
+0,1,Josh Fullmer',,0,,5276,19026,0,1,body4,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test4,Note,2017-02-22 00:00:00,5276
+0,1,Josh Fullmer',,0,,5278,19026,0,1,body5,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test5,Note,2017-02-22 00:00:00,5278
+0,1,Josh Fullmer',,0,,5280,19028,0,1,body6,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test6,Note,2017-02-22 00:00:00,5280
+0,1,Josh Fullmer',,0,,5282,19028,0,1,body7,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test7,Note,2017-02-22 00:00:00,5282
+0,1,Josh Fullmer',,0,,5284,19028,0,1,body8,2017-02-22 11:36:47,3,2017-02-22 11:36:47,test8,Note,2017-02-22 00:00:00,5284

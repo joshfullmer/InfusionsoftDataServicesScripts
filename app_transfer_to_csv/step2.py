@@ -8,6 +8,7 @@ Step 2 generates up to 6 CSVs:
 - subscriptions.csv
 
 """
+import datetime
 import csv
 import json
 import os
@@ -15,11 +16,12 @@ import os
 from infusionsoft.library import Infusionsoft
 
 import config
+from constants import FIELDS, DATATYPES
 from infusionsoft_actions import get_table, create_custom_field
 from tools import convert_dict_dates_to_string
 
 
-dir_path = "output/{} >> {}/".format(config.SOURCE_APPNAME,
+dir_path = "output/{} -- {}/".format(config.SOURCE_APPNAME,
                                      config.DESTINATION_APPNAME)
 os.makedirs(dir_path, exist_ok=True)
 
@@ -145,13 +147,11 @@ if config.TASKS_APPOINTMENTS:
     tasks = get_table(
         src_infusionsoft,
         'ContactAction',
-        {'ObjectType': 'Task'}
-    )
+        {'ObjectType': 'Task'})
     appointments = get_table(
         src_infusionsoft,
         'ContactAction',
-        {'ObjectType': 'Appointment'}
-    )
+        {'ObjectType': 'Appointment'})
 
     actions = tasks + appointments
 
@@ -177,22 +177,17 @@ if config.TASKS_APPOINTMENTS:
 
     existing_actions = existing_tasks + existing_appts
 
-    print(existing_actions)
-
     default_user_id = dest_infusionsoft.DataService(
         'getAppSetting',
         'Templates',
-        'defuserid'
-    )
+        'defuserid')
     default_user = get_table(
         dest_infusionsoft,
         'User',
-        {'Id': default_user_id}
-    )[0]
+        {'Id': default_user_id})[0]
     default_user_name = "{} {}".format(
         default_user['FirstName'],
-        default_user['LastName']
-    )
+        default_user['LastName'])
 
     with open("{}tasks_appointments.csv".format(dir_path),
               'w',
@@ -215,3 +210,135 @@ if config.TASKS_APPOINTMENTS:
                                 default_user_name)
             action = convert_dict_dates_to_string(action)
             writer.writerow(action)
+
+
+# OPPORTUNITIES
+# =============================================================================
+
+if config.OPPORTUNITIES:
+    src_opp_id = create_custom_field(dest_infusionsoft,
+                                     'Source App Opportunity ID')['Name']
+
+    opp_custom_fields = get_table(src_infusionsoft,
+                                  'DataFormField',
+                                  {'FormId': -4})
+    opp_fields = FIELDS['Lead'][:]
+    opp_fields += ["_" + cf['Name'] for cf in opp_custom_fields]
+    opportunities = get_table(src_infusionsoft, 'Lead', {}, opp_fields)
+
+    stage_relationship = {}
+    for stage in get_table(src_infusionsoft, 'Stage'):
+        stage_relationship[stage['Id']] = stage['StageName']
+
+    rename_mapping = {}
+    for cf in opp_custom_fields:
+        if cf['DataType'] == -23:
+            continue
+        field = create_custom_field(
+            dest_infusionsoft,
+            cf['Label'],
+            'Lead',
+            DATATYPES[cf['DataType']],
+            cf.get('Values'))
+        rename_mapping["_" + cf['Name']] = field['Name']
+
+    existing_opps = []
+    for opp in get_table(dest_infusionsoft,
+                         'Lead',
+                         {src_opp_id: "_%"},
+                         [src_opp_id]):
+        existing_opps += [int(opp[src_opp_id])]
+
+    with open("{}opportunities.csv".format(dir_path),
+              'w',
+              newline='') as csvfile:
+        fieldnames = list(set().union(*(d.keys() for d in opportunities)))
+        fieldnames += [src_opp_id]
+        writer = csv.DictWriter(
+            csvfile,
+            fieldnames=fieldnames,
+            extrasaction='ignore')
+        writer.writeheader()
+
+        for opp in opportunities:
+            opp_exists = opp['Id'] in existing_opps
+            contact_exists = contact_relationship.get(opp['ContactID'])
+            if not contact_exists or opp_exists:
+                continue
+            for key in opp_fields:
+                if rename_mapping.get(key):
+                    opp[rename_mapping[key]] = opp.pop(key, None)
+            opp['ContactID'] = contact_relationship[opp['ContactID']]
+            opp['StageID'] = stage_relationship.get(opp['StageID'])
+            opp['UserID'] = user_relationship[opp['UserID']]
+            opp[src_opp_id] = str(opp['Id'])
+            opp = convert_dict_dates_to_string(opp)
+            writer.writerow(opp)
+
+
+# ORDERS
+# =============================================================================
+
+if config.ORDERS:
+    src_order_id = create_custom_field(dest_infusionsoft,
+                                       'Source App Order ID')['Name']
+
+    order_custom_fields = get_table(src_infusionsoft,
+                                    'DataFormField',
+                                    {'FormId': -9})
+    order_fields = FIELDS['Job'][:]
+    order_fields += ["_" + cf['Name'] for cf in order_custom_fields]
+    orders = get_table(src_infusionsoft, 'Job', {}, order_fields)
+
+    rename_mapping = {}
+    for cf in order_custom_fields:
+        if cf['DataType'] == -23:
+            continue
+        field = create_custom_field(
+            dest_infusionsoft,
+            cf['Label'],
+            'Job',
+            DATATYPES[cf['DataType']],
+            cf.get('Values'))
+        rename_mapping["_" + cf['Name']] = field['Name']
+
+    existing_orders = []
+    for order in get_table(dest_infusionsoft,
+                           'Job',
+                           {src_order_id: "_%"},
+                           [src_order_id]):
+        existing_orders += [int(order[src_order_id])]
+
+    with open("{}orders_no_items.csv".format(dir_path),
+              'w',
+              newline='') as csvfile:
+        fieldnames = list(set().union(*(d.keys() for d in orders)))
+        fieldnames += [src_order_id]
+        writer = csv.DictWriter(
+            csvfile,
+            fieldnames=fieldnames,
+            extrasaction='ignore')
+        writer.writeheader()
+
+        for order in orders:
+            contact_exists = contact_relationship.get(order['ContactId'])
+            sub_order = order['JobRecurringId'] != 0
+            order_exists = order['Id'] in existing_orders
+            if not contact_exists or sub_order or order_exists:
+                continue
+            for key in order_fields:
+                if rename_mapping.get(key):
+                    order[rename_mapping[key]] = order.pop(key, None)
+            order['ProductId'] = product_relationship.get(order['ProductId'])
+            order['DueDate'] = order.get('DueDate') or datetime.datetime.now()
+            order['ContactId'] = contact_relationship[order['ContactId']]
+            order[src_order_id] = order['Id']
+            order = convert_dict_dates_to_string(order)
+            writer.writerow(order)
+
+
+# SUBSCRIPTIONS
+# =============================================================================
+
+if config.SUBSCRIPTIONS:
+    pass

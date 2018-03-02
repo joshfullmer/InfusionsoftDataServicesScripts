@@ -1,0 +1,11 @@
+StageID,Leadsource,Id,LastUpdated,IncludeInForecast,StatusID,ContactID,_Test,AffiliateId,OpportunityNotes,DateInStage,OpportunityTitle,ProjectedRevenueLow,CreatedBy,OrderRevenue,NextActionNotes,LastUpdatedBy,UserID,MonthlyRevenue,NextActionDate,DateCreated,ProjectedRevenueHigh,_SourceAppOpportunityID
+Engaging,,2,2016-07-27 12:51:14,False,8,17730,notes,0,Notes,2014-08-26 14:16:28,Tony Stark,2000.0,1,25030.0,something,1,Josh Fullmer',240.0,2014-04-03 14:00:00,2013-09-27 12:29:37,500.0,2
+,,4,2013-09-27 13:43:35,False,8,17732,,0,,,Jennifer,0.0,-1,0.0,,-1,Josh Fullmer',0.0,2013-09-28 13:43:35,2013-09-27 13:43:35,0.0,4
+New,,6,2014-09-24 13:14:04,False,8,17872,,0,,2014-09-24 13:14:04,Josh Test,0.0,1,0.0,,1,Josh Fullmer',0.0,,2014-09-24 13:14:04,0.0,6
+New,supportteam.infusionsoft.com,8,2015-03-12 11:33:37,False,8,17840,,0,,2015-02-13 16:10:16,Batman,0.0,1,10.0,test,1,Josh Fullmer',0.0,2015-02-13 23:15:00,2015-02-13 16:10:16,0.0,8
+New,,12,2015-07-10 15:11:20,False,8,17730,,0,,2015-07-10 15:11:20,Place,0.0,1,0.0,,1,Josh Fullmer',0.0,,2015-07-10 15:11:20,0.0,12
+New,,14,2015-07-10 15:14:37,False,8,17730,,0,,2015-07-10 15:14:37,Place,0.0,-1,0.0,,-1,Josh Fullmer',0.0,2015-07-11 15:14:37,2015-07-10 15:14:37,0.0,14
+Working,,16,2015-07-10 15:16:24,False,8,17730,,0,,2015-07-10 15:16:24,Place,0.0,1,0.0,,1,Josh Fullmer',0.0,,2015-07-10 15:16:24,0.0,16
+Working,,18,2015-07-10 16:49:41,False,8,17730,,0,,2015-07-10 16:49:41,Place,0.0,1,0.0,,1,Josh Fullmer',0.0,,2015-07-10 16:49:41,0.0,18
+New,,20,2016-08-03 18:38:05,False,8,17950,,0,,2016-08-03 18:38:05,Place,0.0,1,0.0,,1,Josh Fullmer',0.0,,2016-08-03 18:38:05,0.0,20
+New,,24,2017-08-07 16:03:21,False,8,17730,,0,,2017-06-30 11:40:18,The Josh Fullmer Family,0.0,1,0.0,,1,Josh Fullmer',0.0,,2017-06-30 11:40:18,0.0,24
