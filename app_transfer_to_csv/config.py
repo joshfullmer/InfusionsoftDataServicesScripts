@@ -32,4 +32,4 @@ SUBSCRIPTIONS = True
 # bill before the cutoff date you specify below
 
 # Format: "YYYY/MM/DD"
-SUBSCRIPTION_CUT_OFF_DATE = '2018/04/05'
+SUBSCRIPTION_CUT_OFF_DATE = ''
