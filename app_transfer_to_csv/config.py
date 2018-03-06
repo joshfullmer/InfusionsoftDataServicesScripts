@@ -31,7 +31,7 @@ SUBSCRIPTIONS = True
 # ADDITIONAL SETTINGS
 # ===================
 
-# This setting allows you to provide a list of tag IDs. The app will only 
+# This setting allows you to provide a list of tag IDs. The app will only
 # add contacts with that tag ID to the CSV for importing
 CONTACTS_WITH_TAG_IDS = []
 
