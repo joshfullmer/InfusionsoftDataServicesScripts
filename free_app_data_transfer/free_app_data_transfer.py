@@ -5,13 +5,14 @@ It will automatically transfer Contacts, Tags, and Actions(Tasks, Notes, Appts)
 """
 from infusionsoft.library import Infusionsoft
 
-from constants import (QJ154_APIKEY, TE361_APIKEY, FIELDS, DATATYPES)
+from constants import FIELDS, DATATYPES
+# from constants import QJ154_APIKEY, TE361_APIKEY
 from infusionsoft_actions import get_table, create_custom_field
 
-SOURCE_APPNAME = 'qj154'  # 'qj154'
-SOURCE_API_KEY = QJ154_APIKEY  # QJ154_APIKEY
-DESTINATION_APPNAME = 'te361'  # 'te361'
-DESTINATION_API_KEY = TE361_APIKEY  # TE361_APIKEY
+SOURCE_APPNAME = 'yt431'  # 'qj154'
+SOURCE_API_KEY = 'bbe3069955028d9fd13726c61c08ae6e'  # QJ154_APIKEY
+DESTINATION_APPNAME = 'fp434'  # 'te361'
+DESTINATION_API_KEY = '6d7bb9889c8d8609b2969882dc1c732f'  # TE361_APIKEY
 
 CONTACTS_WITH_TAG_IDS = []
 
@@ -175,7 +176,7 @@ for tag_app in tags_applied:
         continue
     tag_id = tag_relationship[tag_app['GroupId']]
     if ((existing_tag_apps) and
-            (tag_id in existing_tag_apps.get(contact_id))):
+            (tag_id in existing_tag_apps.get(contact_id, []))):
         print("Tag ID {} already applied.".format(tag_id))
         continue
     dest_infusionsoft.ContactService('addToGroup',
