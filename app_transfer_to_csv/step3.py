@@ -42,7 +42,8 @@ product_relationship = {int(k): int(v) for k, v in
 
 if config.ORDERS:
     src_order_id = create_custom_field(dest_infusionsoft,
-                                       'Source App Order ID')['Name']
+                                       'Source App Order ID',
+                                       'Job')['Name']
 
     order_relationship = {}
     for order in get_table(
@@ -50,6 +51,8 @@ if config.ORDERS:
             'Job',
             {src_order_id: "_%"},
             ['Id', src_order_id]):
+        if isinstance(order, str):
+            break
         order_relationship[int(order[src_order_id])] = order['Id']
 
     order_items = get_table(src_infusionsoft, 'OrderItem')

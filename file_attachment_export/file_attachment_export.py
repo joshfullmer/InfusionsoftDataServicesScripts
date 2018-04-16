@@ -22,8 +22,8 @@ import constants
 from infusionsoft_actions import get_table
 
 # Initialization
-appname = 'qj154'
-api_key = constants.QJ154_APIKEY
+appname = 'ni204'
+api_key = 'e8be5185a415f3173a42f52dc6f4361e'
 
 infusionsoft = Infusionsoft(appname, api_key)
 

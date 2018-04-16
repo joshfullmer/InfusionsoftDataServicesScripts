@@ -284,7 +284,8 @@ if config.OPPORTUNITIES:
 
 if config.ORDERS:
     src_order_id = create_custom_field(dest_infusionsoft,
-                                       'Source App Order ID')['Name']
+                                       'Source App Order ID'
+                                       'Job')['Name']
 
     order_custom_fields = get_table(src_infusionsoft,
                                     'DataFormField',
@@ -310,6 +311,9 @@ if config.ORDERS:
                            'Job',
                            {src_order_id: "_%"},
                            [src_order_id]):
+        print(order)
+        if isinstance(order, str):
+            break
         existing_orders += [int(order[src_order_id])]
 
     with open("{}orders_no_items.csv".format(dir_path),

@@ -103,6 +103,7 @@ if config.CONTACTS:
         0,
         {'CategoryName': 'Application Transfer'},
         ['Id'])
+    dest_tag_id = None
     if dest_category_id:
         dest_tag_id = dest_infusionsoft.DataService(
             'query',
@@ -186,7 +187,7 @@ if config.CONTACTS:
                 if rename_mapping.get(key):
                     contact[rename_mapping[key]] = contact.pop(key, None)
             contact[src_contact_id] = str(contact['Id'])
-            contact['OwnerId'] = user_relationship[contact['OwnerId']]
+            contact['OwnerId'] = user_relationship.get(contact.get('OwnerId'))
             contact['TransferTag'] = "Data from {}".format(
                 config.SOURCE_APPNAME)
             if config.COMPANIES:
@@ -340,8 +341,8 @@ if config.TAGS:
     category_relationship = {}
     categories_reversed = {}
     for category in categories:
-        category_relationship[category['Id']] = (existing_categories[
-            category['CategoryName']] or
+        category_relationship[category['Id']] = (existing_categories.get(
+            category.get('CategoryName')) or
             dest_infusionsoft.DataService(
                 'add', 'ContactGroupCategory', category)
             )

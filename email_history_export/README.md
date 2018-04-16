@@ -29,10 +29,12 @@ ON EmailSent.EmailId=Mail.Id WHERE MailContent.FileBoxId > 0;
 ```sql
 CREATE TABLE FileBox_20180214 AS (SELECT * FROM FileBox);
 ```
+
 #### Creates an ID to use
 ```sql
 CREATE TABLE FileBoxEmailId_20180214 AS (SELECT Id FROM FileBox WHERE FileName LIKE 'email%');
 ```
+Put these IDs in the 'file_ids.py'
 
 #### Changes a few columns to work with export
 ```sql

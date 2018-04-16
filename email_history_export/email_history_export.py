@@ -15,8 +15,8 @@ import os
 import shutil
 
 # Initiation
-appname = 'jg351'
-api_key = '147271c4053bcee09571853d90f3ca8d'
+appname = 'aps'
+api_key = '009d934d1ce9ce27de31278901a360ff'
 
 infusionsoft = Infusionsoft(appname, api_key)
 
@@ -30,6 +30,11 @@ for id in FILE_IDS:
     file = open("output/{}_emails/email_{}.html".format(appname, id), "w")
 
     string = infusionsoft.FileService('getFile', id)
+
+    if isinstance(string, tuple):
+        if string[0] == 'ERROR':
+            print(string[1])
+            break
 
     file.write(base64.b64decode(string).decode('utf-8'))
 
