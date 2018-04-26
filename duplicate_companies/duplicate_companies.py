@@ -1,3 +1,6 @@
+import datetime
+import sys
+
 import jellyfish  # http://jellyfish.readthedocs.io/en/latest/comparison.html
 import pandas as pd
 
@@ -27,10 +30,15 @@ def strip_company(string):
     string = string.rstrip(',')
     return string
 
-df = pd.read_csv('test.csv')
+
+start = datetime.datetime.now()
+df = pd.read_csv('ul442_company.csv')
 df = df.dropna()
 rows_list = []
 for index, row in df.iterrows():
+
+    sys.stdout.write("\r{} rows completed.".format(index))
+    sys.stdout.flush()
 
     # Get only the companies that have the same first 3 characters
     # This aids in cutting down the overall performance
@@ -60,3 +68,5 @@ for index, row in df.iterrows():
 
 output = pd.DataFrame(rows_list)
 output.to_csv('duplicate_companies.csv', index=False)
+
+print(datetime.datetime.now() - start)

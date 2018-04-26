@@ -9,10 +9,10 @@ from constants import FIELDS, DATATYPES
 # from constants import QJ154_APIKEY, TE361_APIKEY
 from infusionsoft_actions import get_table, create_custom_field
 
-SOURCE_APPNAME = 'yq442'  # 'qj154'
-SOURCE_API_KEY = '0354304d6e21af044a25efb632feb906'  # QJ154_APIKEY
-DESTINATION_APPNAME = 'fz446'  # 'te361'
-DESTINATION_API_KEY = '1c63b99f1dd0aa8c8967ee1f80ad32cd'  # TE361_APIKEY
+SOURCE_APPNAME = ''  # 'qj154'
+SOURCE_API_KEY = ''  # QJ154_APIKEY
+DESTINATION_APPNAME = ''  # 'te361'
+DESTINATION_API_KEY = ''  # TE361_APIKEY
 
 CONTACTS_WITH_TAG_IDS = []
 
@@ -87,6 +87,11 @@ for contact in contacts:
           " {} - {} {}".format(created_contact_id,
                                contact.get('FirstName'),
                                contact.get('LastName')))
+    if contact.get('Email'):
+        dest_infusionsoft.APIEmailService(
+            'optIn',
+            contact.get('Email'),
+            'Transfer from Free Trial App')
     num_contacts_created += 1
 
 # TAGS
@@ -198,7 +203,6 @@ for action in get_table(dest_infusionsoft,
                         'ContactAction',
                         query={src_action_id: '_%'},
                         fields=['Id', src_action_id]):
-    print(action)
     existing_actions += [int(action[src_action_id])]
 
 user_id = get_table(dest_infusionsoft, 'User')[0]['Id']
@@ -221,6 +225,28 @@ for action in get_table(src_infusionsoft, 'ContactAction'):
     print("ContactAction ID {} created.".format(action_id))
     num_actions_created += 1
 
+# PRODUCTS
+# =============================================================================
+
+existing_products = []
+for product in get_table(dest_infusionsoft,
+                         'Product',
+                         query={'ProductName': '_%'},
+                         fields=['ProductName']):
+    existing_products += [product.get('ProductName')]
+
+num_products_created = 0
+
+for product in get_table(src_infusionsoft, 'Product'):
+    if product.get('ProductName') in existing_products:
+        print("Product \"{}\" exists.".format(product.get('ProductName')))
+        continue
+    product_id = dest_infusionsoft.DataService('add',
+                                               'Product',
+                                               product)
+    print("Product ID {} created.".format(product_id))
+    num_products_created += 1
+
 # Report on data transferred
 print("Data successfully transferred from {} to {}".format(
     SOURCE_APPNAME, DESTINATION_APPNAME
@@ -230,3 +256,5 @@ print("Number of tags created: {}".format(num_tags_created))
 print("Number of tag categories created: {}".format(num_categories_created))
 print("Number of tags applied: {}".format(num_tags_applied))
 print("Number of contact actions created: {}".format(num_actions_created))
+print("Number of products created: {}".format(num_products_created))
+print("Number of campaigns transferred: ")
