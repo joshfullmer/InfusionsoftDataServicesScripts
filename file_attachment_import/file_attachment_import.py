@@ -57,6 +57,13 @@ with open(csv_path, newline='', encoding='utf-8-sig') as csvfile:
         file_num += 1
         file_path = "/".join([dir_path, row['filepath']])
 
+        if ((not os.path.isfile(file_path)) or
+                (os.path.getsize(file_path)/2**20 > 9.5) or
+                (row.get('extension') is None) or
+                (row['extension'] == '') or
+                (row['extension'].lower() not in SUPPORTED_FILE_TYPES)):
+            continue
+
         print("")
         print("File #{}".format(file_num))
         print("{} - {}".format(file_path,
@@ -65,13 +72,6 @@ with open(csv_path, newline='', encoding='utf-8-sig') as csvfile:
         print("{}: {}".format(row['id'], row['filename']))
         print("Supported File Type? {}".format(row['extension'].lower()
                                                in SUPPORTED_FILE_TYPES))
-
-        if ((not os.path.isfile(file_path)) or
-                (os.path.getsize(file_path)/2**20 > 9.5) or
-                (row.get('extension') is None) or
-                (row['extension'] == '') or
-                (row['extension'].lower() not in SUPPORTED_FILE_TYPES)):
-            continue
 
         file = open(file_path, 'rb')
         resp = infusionsoft.FileService('uploadFile',
