@@ -44,8 +44,8 @@ if not os.path.isfile(csv_path):
     raise FileNotFoundError("Please name the CSV '{}_attachments.csv' "
                             "and put it in 'attachments/'".format(appname))
 
-with open(csv_path, newline='', encoding='utf-8-sig') as csvfile:
-    reader = csv.DictReader(csvfile)
+with open(csv_path, newline='', encoding='utf-8-sig', errors='ignore') as f:
+    reader = csv.DictReader(f)
 
     if sorted(reader.fieldnames) != sorted(['id', 'filename',
                                             'filepath', 'extension']):

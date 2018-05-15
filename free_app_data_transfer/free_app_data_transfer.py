@@ -9,10 +9,10 @@ from constants import FIELDS, DATATYPES
 # from constants import QJ154_APIKEY, TE361_APIKEY
 from infusionsoft_actions import get_table, create_custom_field
 
-SOURCE_APPNAME = ''  # 'qj154'
-SOURCE_API_KEY = ''  # QJ154_APIKEY
-DESTINATION_APPNAME = ''  # 'te361'
-DESTINATION_API_KEY = ''  # TE361_APIKEY
+SOURCE_APPNAME = 'xi459'  # 'qj154'
+SOURCE_API_KEY = 'c617ce96d0d4e0df29e0374b59dc79e5'  # QJ154_APIKEY
+DESTINATION_APPNAME = 'mw464'  # 'te361'
+DESTINATION_API_KEY = '16ff7fb67a16b624239da26d5628dbe9'  # TE361_APIKEY
 
 CONTACTS_WITH_TAG_IDS = []
 
@@ -38,7 +38,7 @@ for custom_field in custom_fields:
                                     custom_field['Label'],
                                     'Contact',
                                     DATATYPES[custom_field['DataType']],
-                                    custom_field.get('Values'))
+                                    {'Values': custom_field.get('Values')})
 
         rename_mapping["_" + custom_field['Name']] = field['Name']
 
@@ -85,8 +85,8 @@ for contact in contacts:
     contact_relationship[contact['Id']] = created_contact_id
     print("Contact created!  Contact ID:"
           " {} - {} {}".format(created_contact_id,
-                               contact.get('FirstName'),
-                               contact.get('LastName')))
+                               contact.get('FirstName', ''),
+                               contact.get('LastName', '')))
     if contact.get('Email'):
         dest_infusionsoft.APIEmailService(
             'optIn',

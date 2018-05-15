@@ -1,16 +1,18 @@
 import datetime
-from infusionsoft.library import Infusionsoft
+from infusionsoft.library import Infusionsoft, InfusionsoftOAuth
 import pandas as pd
 
 from constants import FIELDS
 from infusionsoft_actions import get_table
 
-APPNAME = 'ul442'
-API_KEY = 'fb71fa8e8cf00e42a8e0ccb108b16d91'
+APPNAME = 'xi445'
+API_KEY = 'ea12ee116390ecda5543ac8f44c0913f'
+ACCESS_TOKEN = 'z3sfk68fqrynjr33dwbewghq'
 
-ifs = Infusionsoft(APPNAME, API_KEY)
+# ifs = Infusionsoft(APPNAME, API_KEY)
+ifs = InfusionsoftOAuth(ACCESS_TOKEN)
 
-df = pd.read_csv('duplicate_companies.csv')
+df = pd.read_csv('duplicate_companies_coalmarch.csv')
 df = df.dropna()
 
 company_fields = FIELDS['Company'][:]
@@ -26,11 +28,10 @@ for index, row in df.iterrows():
     dupe_id = int(row.dupe_id)
     print("\nMerging {} with {}".format(orig_id, dupe_id))
     orig_comp = ifs.DataService('load', 'Company', orig_id, company_fields)
-    if dupe_id == 6804:
-        company_fields.remove('_Critera')
     dupe_comp = ifs.DataService('load', 'Company', dupe_id, company_fields)
 
     if isinstance(orig_comp, tuple) or isinstance(dupe_comp, tuple):
+        print(f"{orig_id} or {dupe_id} already merged.")
         continue
 
     if orig_id in deleted_companies or dupe_id in deleted_companies:
@@ -96,7 +97,7 @@ for index, row in df.iterrows():
     for field in company_fields:
         if orig_comp.get(field) or dupe_comp.get(field):
             fields[field] = orig_comp.get(field) or dupe_comp.get(field)
-        ifs.DataService('update', 'Company', orig_id, fields)
+    ifs.DataService('update', 'Company', orig_id, fields)
 
     # Delete dupe company
     ifs.DataService('delete', 'Company', dupe_id)
