@@ -63,7 +63,7 @@ def create_custom_field(infusionsoft, fieldname, tablename='Contact',
                                                        0,
                                                        query,
                                                        ['Name'])[0]['Name']
-        if values:
+        if values and values.get('Values'):
             infusionsoft.DataService('updateCustomField',
                                      field['Id'],
                                      values)
