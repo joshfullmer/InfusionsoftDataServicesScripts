@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %} Free Trial Data Transfer{% endblock %}
+
+{% block content %}
+<div>
+    <h2>Free Trial Data Transfer</h2>
+    <form method="POST" action="{% url 'freetrialtransfer:form' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Begin" >
+    </form>
+</div>
+{% endblock %}
