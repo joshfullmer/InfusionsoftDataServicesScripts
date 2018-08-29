@@ -3,6 +3,7 @@ from .exceptions import InfusionsoftAPIError
 
 
 def get_table(ifs, tablename, query={}, fields=[]):
+    print(f'Pulling {tablename}')
     lookup_fields = []
     if not fields:
         lookup_fields += FIELDS[tablename][:]
@@ -25,4 +26,5 @@ def get_table(ifs, tablename, query={}, fields=[]):
             break
         table += table_page
         page += 1
+    print(f'{tablename} returned {len(table)} records')
     return table

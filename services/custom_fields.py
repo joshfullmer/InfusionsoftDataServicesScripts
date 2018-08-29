@@ -7,26 +7,32 @@ def create_custom_field(ifs, fieldname, tablename='Contact',
                         fieldtype='Text', values=None):
     form_id = CF_FORM_ID.get(tablename)
     if not form_id:
-        raise InfusionsoftAPIError('Tablename not recognized')
+        raise InfusionsoftAPIError(
+            'InfusionsoftAPIError: tablename not recognized')
     query_criteria = {'Label': fieldname, 'FormId': form_id}
-    all_custom_fields = get_table(ifs, 'DataFormField', query_criteria)
+    existing_fields = get_table(ifs, 'DataFormField', query_criteria)
+    if existing_fields and len(existing_fields) > 1:
+        print(existing_fields)
+        raise InfusionsoftAPIError(
+            f'InfusionsoftAPIError: two custom fields with the same label: '
+            f'{existing_fields[0]["Label"]}')
 
-    existing_field = [f for f in all_custom_fields if f['FormId'] == form_id]
+    existing_field = existing_fields[0] if existing_fields else None
 
     field = {}
     if not existing_field:
         tab = get_table(ifs, 'DataFormTab', {'FormId': form_id})
         if not tab:
             raise InfusionsoftAPIError(
-                f'InfusionsoftAPIError: {tablename} custom'
-                ' field tab does not exist')
+                f'InfusionsoftAPIError: {tablename} custom '
+                f'field tab does not exist')
         tab_id = tab[0]['Id']
 
         header = get_table(ifs, 'DataFormGroup', {'TabId': tab_id})
         if not header:
             raise InfusionsoftAPIError(
-                f'InfusionsoftAPIError: {tablename} custom'
-                ' field header does not exist')
+                f'InfusionsoftAPIError: {tablename} custom '
+                f'field header does not exist')
         header_id = header[0]['Id']
 
         created_field = ifs.DataService(
@@ -57,7 +63,7 @@ def create_custom_field(ifs, fieldname, tablename='Contact',
                     'InfusionsoftAPIError: custom field values'
                     ' could not be added')
     else:
-        field['Id'] = existing_field[0]['Id']
-        field['Name'] = '_' + existing_field[0]['Name']
+        field['Id'] = existing_field['Id']
+        field['Name'] = '_' + existing_field['Name']
 
     return field

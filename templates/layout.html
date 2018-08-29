@@ -11,6 +11,16 @@
     <title>{% block title %}Hello, world!{% endblock %}</title>
   </head>
   <body>
+    <a href="{% url 'home' %}">Home</a>
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
     {% block content %}<h1>Hello, world!</h1>{% endblock %}
 
     <!-- Optional JavaScript -->
