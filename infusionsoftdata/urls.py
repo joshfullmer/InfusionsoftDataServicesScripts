@@ -24,4 +24,5 @@ urlpatterns = [
     path(
         'freetrialtransfer/',
         include('freetrialtransfer.urls', namespace='freetrialtransfer')),
+    path('tablequery/', include('tablequery.urls', namespace='tablequery')),
 ]

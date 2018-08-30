@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Database Table Query{% endblock %}
+
+{% block content %}
+<div>
+    <h2>Table Query</h2>
+    <form method="POST" action="{% url 'tablequery:query' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Get Table" >
+    </form>
+</div>
+
+{% if df %}
+{{ df|safe }}
+{% endif %}
+{% endblock %}

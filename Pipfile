@@ -8,7 +8,8 @@ name = "pypi"
 [packages]
 
 django = "*"
-Infusionsoft = {git = "https://github.com/infusionsoft/Official-API-Python-Library.git"}
+infusionsoft = {git = "https://github.com/infusionsoft/Official-API-Python-Library.git"}
+pandas = "*"
 
 
 [dev-packages]

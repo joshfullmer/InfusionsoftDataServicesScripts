@@ -38,7 +38,7 @@ def form(request):
                 results['destination'] = form['dest_app_name'].value()
                 result_string = json.dumps(results)
                 messages.info(request, result_string)
-                return HttpResponseRedirect('thanks')
+                return HttpResponseRedirect('complete')
     else:
         form = TransferForm()
     return render(request, 'freetrialtransfer/form.html', {'form': form})
@@ -50,4 +50,4 @@ def thanks(request):
     storage = messages.get_messages(request)
     results = [message.message for message in storage]
     results = json.loads(results[0])
-    return render(request, 'freetrialtransfer/thankyou.html', results)
+    return render(request, 'freetrialtransfer/complete.html', results)
