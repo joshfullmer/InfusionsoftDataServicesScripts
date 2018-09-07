@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+import dj_database_url
 import django_heroku
 import os
 
@@ -130,3 +131,10 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 django_heroku.settings(locals())
+
+
+# PostgreSQL
+
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=600,
+    ssl_require=True)

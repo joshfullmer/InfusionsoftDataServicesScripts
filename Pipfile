@@ -13,6 +13,7 @@ pandas = "*"
 whitenoise = "*"
 django-heroku = "*"
 gunicorn = "*"
+dj-database-url = "*"
 
 
 [dev-packages]
