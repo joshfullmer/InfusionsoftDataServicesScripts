@@ -21,19 +21,7 @@ def create_custom_field(ifs, fieldname, tablename='Contact',
 
     field = {}
     if not existing_field:
-        tab = get_table(ifs, 'DataFormTab', {'FormId': form_id})
-        if not tab:
-            raise InfusionsoftAPIError(
-                f'InfusionsoftAPIError: {tablename} custom '
-                f'field tab does not exist')
-        tab_id = tab[0]['Id']
-
-        header = get_table(ifs, 'DataFormGroup', {'TabId': tab_id})
-        if not header:
-            raise InfusionsoftAPIError(
-                f'InfusionsoftAPIError: {tablename} custom '
-                f'field header does not exist')
-        header_id = header[0]['Id']
+        header_id = get_custom_field_header(ifs, tablename)
 
         created_field = ifs.DataService(
             'addCustomField',
@@ -47,7 +35,7 @@ def create_custom_field(ifs, fieldname, tablename='Contact',
                 f'{created_field[1]}')
         field['Id'] = created_field
 
-        field['Name'] = get_table(
+        field['Name'] = "_" + get_table(
             ifs,
             'DataFormField',
             {'Id': created_field},
@@ -67,3 +55,24 @@ def create_custom_field(ifs, fieldname, tablename='Contact',
         field['Name'] = '_' + existing_field['Name']
 
     return field
+
+
+def get_custom_field_header(ifs, tablename='Contact'):
+    """Checks if field exists by given fieldname
+    Returns header id"""
+
+    form_id = CF_FORM_ID.get(tablename)
+    tab = get_table(ifs, 'DataFormTab', {'FormId': form_id})
+    if not tab:
+        raise InfusionsoftAPIError(
+            f'InfusionsoftAPIError: {tablename} custom '
+            f'field tab does not exist')
+    tab_id = tab[0]['Id']
+
+    header = get_table(ifs, 'DataFormGroup', {'TabId': tab_id})
+    if not header:
+        raise InfusionsoftAPIError(
+            f'InfusionsoftAPIError: {tablename} custom '
+            f'field header does not exist')
+    header_id = header[0]['Id']
+    return header_id

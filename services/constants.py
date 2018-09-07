@@ -1,3 +1,6 @@
+KEY = 'nndwt7ass8w95kqfgh2utw9h'
+SECRET = 'fWew3CY7zp'
+
 CF_FORM_ID = {
   'Contact': -1,
   'Affiliate': -3,

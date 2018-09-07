@@ -1,6 +1,6 @@
 from services.exceptions import InfusionsoftAPIError
 from services.constants import DATATYPES, FIELDS
-from services.custom_fields import create_custom_field
+from services.custom_fields import create_custom_field, get_custom_field_header
 from services.tables import get_table
 
 
@@ -8,6 +8,8 @@ def begin(source, destination):
     """Handles the automatic transfer of data from one app to another through
     the Infusionsoft API"""
 
+    # TODO Add check for two custom fields
+    custom_field_check(destination)
     contact_mapping, contact_count = transfer_contacts(source, destination)
     tag_mapping, tag_count, category_count = transfer_tags(source, destination)
     tag_apply_count = apply_tags(
@@ -18,12 +20,17 @@ def begin(source, destination):
     action_count = transfer_actions(source, destination, contact_mapping)
     product_count = transfer_products(source, destination)
     return {
-        'contacts': contact_count,
-        'tags': tag_count,
+        'contacts': len(contact_mapping),
+        'tags': len(tag_mapping),
         'tag_categories': category_count,
         'tag_apps': tag_apply_count,
         'contact_actions': action_count,
         'products': product_count}
+
+
+def custom_field_check(destination):
+    get_custom_field_header(destination, 'Contact')
+    get_custom_field_header(destination, 'ContactAction')
 
 
 def transfer_contacts(source, destination):
