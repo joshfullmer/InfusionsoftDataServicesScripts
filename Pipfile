@@ -10,10 +10,11 @@ name = "pypi"
 django = "*"
 infusionsoft = {git = "https://github.com/infusionsoft/Official-API-Python-Library.git"}
 pandas = "*"
-whitenoise = "*"
 django-heroku = "*"
 gunicorn = "*"
 dj-database-url = "*"
+whitenoise = "*"
+requests = "*"
 
 
 [dev-packages]

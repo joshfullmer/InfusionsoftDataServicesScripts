@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'freetrialtransfer.apps.FreetrialtransferConfig',
     'tablequery.apps.TablequeryConfig',
     'emailhistoryexport.apps.EmailhistoryexportConfig',
+    'instance.apps.InstanceConfig',
 ]
 
 MIDDLEWARE = [
