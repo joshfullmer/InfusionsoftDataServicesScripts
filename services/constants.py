@@ -1,5 +1,6 @@
 KEY = 'nndwt7ass8w95kqfgh2utw9h'
 SECRET = 'fWew3CY7zp'
+FTP_PASS = 'Furinkazan6'
 
 CF_FORM_ID = {
   'Contact': -1,

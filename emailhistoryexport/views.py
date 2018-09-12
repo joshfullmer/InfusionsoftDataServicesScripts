@@ -10,6 +10,7 @@ import urllib
 from instance.models import Instance
 from services.api import (get_access_token_response,
                           get_refresh_token_response)
+from services.ftp.ftp import upload_file
 
 
 def instance_form(request, instance_name):
@@ -60,6 +61,7 @@ def begin(request, instance_name):
         tmp = NamedTemporaryFile(delete=False)
         with open(tmp.name, 'w') as file:
             file.write('hello')
+            upload_file(file)
         response = FileResponse(open(tmp.name, 'rb'))
         filename = f'hello_{instance_name}.txt'
         disp = f'attachment; filename={filename}'
