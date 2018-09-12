@@ -1,6 +1,6 @@
 from django.core.files.temp import NamedTemporaryFile
 
-from implicit_ftp_tls import ImplicitFTP_TLS
+from ..ftp.implicit_ftp_tls import ImplicitFTP_TLS
 from ..constants import FTP_PASS
 
 
