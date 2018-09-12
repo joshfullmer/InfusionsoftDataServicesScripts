@@ -5,6 +5,7 @@ from . import views
 
 app_name = 'emailhistoryexport'
 urlpatterns = [
+    path('<instance_name>/begin', views.begin, name='begin'),
     path('<instance_name>', views.instance_form, name='instance_form'),
     path('', views.form, name='form'),
 ]

@@ -4,6 +4,5 @@
 
 {% block content %}
 <h1>Email History Export</h1>
-
-<button>Begin Email History Export</button>
+<input type="button" value="Begin Export" onclick="window.open('/emailhistoryexport/{{ instance_name }}/begin')">
 {% endblock %}

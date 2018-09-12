@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.core.files.temp import NamedTemporaryFile
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.utils import timezone
 from wsgiref.util import FileWrapper
 
@@ -33,7 +33,6 @@ def query(request):
                 df = pd.DataFrame(results)
                 if 'csv_export' in request.POST:
                     file = NamedTemporaryFile(suffix='.csv')
-                    print(file)
                     df.to_csv(file.name, index=False)
                     wrapper = FileWrapper(file)
                     response = HttpResponse(wrapper, content_type='text/csv')
