@@ -10,6 +10,7 @@ def home(request):
 
 @csrf_exempt
 def slack(request):
+    print(request.body)
     body = json.loads(request.body)
     print(body)
     response_data = {}
