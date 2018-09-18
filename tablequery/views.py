@@ -28,7 +28,7 @@ def query(request):
             try:
                 results = get_table(ifs, tablename)
             except InfusionsoftAPIError as e:
-                messages.error(e)
+                messages.error(e.message)
             else:
                 df = pd.DataFrame(results)
                 if 'csv_export' in request.POST:

@@ -20,8 +20,8 @@ def get_table(ifs, tablename, query={}, fields=[]):
                                      lookup_fields)
         if isinstance(table_page, tuple):
             raise InfusionsoftAPIError(
-                f'InfusionsoftAPIError: Error getting'
-                f' {tablename} table {table_page[1]}')
+                f'InfusionsoftAPIError: Error getting '
+                f'{tablename} table {table_page[1]}')
         if not table_page:
             break
         table += table_page
