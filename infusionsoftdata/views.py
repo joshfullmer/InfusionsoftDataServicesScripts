@@ -11,16 +11,20 @@ def home(request):
 
 @csrf_exempt
 def slack(request):
-    print(request.body)
     body_decoded = request.body.decode('utf-8')
-    print(body_decoded)
     parsed_response = {}
     for keyvalue in body_decoded.split('&'):
         key, value = keyvalue.split('=')
         parsed_response[key] = unquote(value)
-    print(parsed_response)
-    response_data = {}
-    response_data['text'] = 'Walk up successfully recorded'
+    response_data = {
+        'response_type': 'ephemeral',
+        'text': 'Walk up successfully recorded',
+        'attachments': [
+            {
+                'text': parsed_response['text']
+            }
+        ]
+    }
     return HttpResponse(
         json.dumps(response_data),
         content_type='application/json')
