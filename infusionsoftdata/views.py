@@ -11,7 +11,8 @@ def home(request):
 @csrf_exempt
 def slack(request):
     print(request.body)
-    body = json.loads(request.body)
+    body_decoded = request.body.decode('utf-8')
+    body = json.loads(body_decoded)
     print(body)
     response_data = {}
     response_data['text'] = 'Walk up successfully recorded'
