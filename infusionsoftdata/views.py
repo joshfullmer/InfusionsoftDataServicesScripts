@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.utils.http import unquote
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -16,7 +17,7 @@ def slack(request):
     parsed_response = {}
     for keyvalue in body_decoded.split('&'):
         key, value = keyvalue.split('=')
-        parsed_response[key] = value
+        parsed_response[key] = unquote(value)
     print(parsed_response)
     response_data = {}
     response_data['text'] = 'Walk up successfully recorded'
