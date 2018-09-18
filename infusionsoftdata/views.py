@@ -12,8 +12,12 @@ def home(request):
 def slack(request):
     print(request.body)
     body_decoded = request.body.decode('utf-8')
-    body = json.loads(body_decoded)
-    print(body)
+    print(body_decoded)
+    parsed_response = {}
+    for keyvalue in body_decoded.split('&'):
+        key, value = keyvalue.split('=')
+        parsed_response[key] = value
+    print(parsed_response)
     response_data = {}
     response_data['text'] = 'Walk up successfully recorded'
     return HttpResponse(
