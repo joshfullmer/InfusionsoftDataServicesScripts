@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from services import tasks
+from . import tasks
 
 
 def home(request):
