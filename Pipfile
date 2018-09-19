@@ -7,7 +7,7 @@ name = "pypi"
 
 [packages]
 
-Django = "*"
+django = "*"
 infusionsoft = {git = "https://github.com/infusionsoft/Official-API-Python-Library.git"}
 pandas = "*"
 django-heroku = "*"
@@ -16,6 +16,7 @@ dj-database-url = "*"
 whitenoise = "*"
 requests = "*"
 redis = "*"
+celery = {git = "https://github.com/celery/celery.git"}
 
 
 [dev-packages]
