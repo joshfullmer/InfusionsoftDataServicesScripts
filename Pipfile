@@ -16,7 +16,6 @@ dj-database-url = "*"
 whitenoise = "*"
 requests = "*"
 redis = "*"
-celery = {git = "https://github.com/celery/celery.git", ref = "master"}
 
 
 [dev-packages]
