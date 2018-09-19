@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TARGET=/app/.heroku/python/lib/python3.7/site-packages/celery/backends
+TARGET=/usr/local/lib/python3.7/site-packages/celery/backends
 cd $TARGET
 if [ -e async.py ]
 then
