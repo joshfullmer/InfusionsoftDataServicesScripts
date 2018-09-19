@@ -9,4 +9,3 @@ def counter():
     for _ in range(10000):
         i += 1
         time.sleep(5)
-    return i
