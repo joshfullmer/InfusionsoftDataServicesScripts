@@ -9,7 +9,6 @@ from . import tasks
 
 def home(request):
     tasks.counter.delay()
-    print("Rendering home")
     return render(request, 'home.html')
 
 
