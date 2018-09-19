@@ -4,8 +4,11 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+from services import tasks
+
 
 def home(request):
+    tasks.counter.delay()
     return render(request, 'home.html')
 
 
