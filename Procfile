@@ -1,2 +1,2 @@
 web: gunicorn infusionsoftdata.wsgi --log-file -
-worker: celery worker --app=services.tasks.app
+worker: celery -A infusionsoftdata.tasks worker -B --loglevel=info
