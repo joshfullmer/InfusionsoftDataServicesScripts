@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "34067e3c1d3502992fa84d8e152e1bb469155b43ff7a628ab5da3b6d55263080"
+            "sha256": "fce9c809ae7ce83ec3685af05da5ee1923742ea44588c66fb7d734e099629029"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,10 +16,6 @@
         ]
     },
     "default": {
-        "celery": {
-            "git": "https://github.com/celery/celery.git",
-            "ref": "master"
-        },
         "certifi": {
             "hashes": [
                 "sha256:376690d6f16d32f9d1fe8932551d80b23e9d393a8578c5633a2ed39a64861638",
