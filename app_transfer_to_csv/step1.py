@@ -117,7 +117,7 @@ if config.CONTACTS:
     if dest_category_id:
         tag_cat_id = dest_category_id[0]['Id']
     else:
-        dest_infusionsoft.DataService(
+        tag_cat_id = dest_infusionsoft.DataService(
             'add',
             'ContactGroupCategory',
             {'CategoryName': 'Application Transfer'}
@@ -146,7 +146,10 @@ if config.CONTACTS:
     # Add all contacts to CSV
     num_contacts_created = 0
     emails = []
-    with open("{}contacts.csv".format(dir_path), "w", newline='') as csvfile:
+    with open("{}contacts.csv".format(dir_path),
+              "w",
+              newline='',
+              encoding='utf-8') as csvfile:
 
         # Generate fieldnames for CSV
         all_fieldnames = (FIELDS['Contact'][:] +
@@ -210,7 +213,8 @@ if config.CONTACTS:
     # Create list of opted out emails
     with open("{}email_opt_outs.csv".format(dir_path),
               "w",
-              newline='') as csvfile:
+              newline='',
+              encoding='utf-8') as csvfile:
         fieldnames = FIELDS['EmailAddStatus'][:]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
@@ -226,7 +230,8 @@ if config.CONTACTS:
 # =============================================================================
 if config.COMPANIES:
     src_account_id = create_custom_field(dest_infusionsoft,
-                                         'Source App Company ID')['Name']
+                                         'Source App Company ID',
+                                         'Company')['Name']
 
     # Generates full list of company fields, including custom fields
     company_fields = FIELDS['Company'][:]
@@ -269,12 +274,15 @@ if config.COMPANIES:
                                 'Company',
                                 {src_account_id: "_%"},
                                 ['Id', src_account_id]):
-        existing_companies[int(contact_id[src_account_id])] = company_id['Id']
+        existing_companies[int(company_id[src_account_id])] = company_id['Id']
 
     # Create companies
     num_companies_created = 0
     company_relationship = {}
-    with open("{}companies.csv".format(dir_path), "w", newline='') as csvfile:
+    with open("{}companies.csv".format(dir_path),
+              "w",
+              newline='',
+              encoding='utf-8') as csvfile:
 
         # Generate fieldnames for CSV
         fieldnames = (FIELDS['Company'][:] +
