@@ -1,1 +1,0 @@
-web: gunicorn infusionsoftdata.wsgi --log-file -

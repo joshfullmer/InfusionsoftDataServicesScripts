@@ -1,2 +1,0 @@
-class InfusionsoftAPIError(Exception):
-    pass
