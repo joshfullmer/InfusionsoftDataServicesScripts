@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+{% block title %}Email History Export{% endblock %}
+
+{% block content %}
+<h1>Email History Export</h1>
+<a href="https://signin.infusionsoft.com/app/oauth/authorize?client_id={{ client_id }}&redirect_uri={{ redirect_uri }}&response_type=code"><button>Authorize</button></a>
+{% endblock %}

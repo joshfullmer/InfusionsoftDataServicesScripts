@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}Infusionsoft Data Services | Home{% endblock %}
+
+{% block content %}
+    <a href="{% url 'freetrialtransfer:form' %}"><button>Free Trial Data Transfer</button></a>
+    <a href="{% url 'tablequery:query' %}"><button>Table Query</button></a>
+    <a href="{% url 'emailhistoryexport:form' %}"><button>Email History Export</button></a>
+{% endblock %}

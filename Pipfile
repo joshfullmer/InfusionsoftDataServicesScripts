@@ -1,0 +1,26 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+Django = "*"
+infusionsoft = {git = "https://github.com/infusionsoft/Official-API-Python-Library.git"}
+pandas = "*"
+django-heroku = "*"
+gunicorn = "*"
+dj-database-url = "*"
+whitenoise = "*"
+requests = "*"
+
+
+[dev-packages]
+
+
+
+[requires]
+
+python_version = "3.7"

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Free Trial Transfer Complete!{% endblock %}
+
+{% block content %}
+    <p>Complete!</p>
+    <pre><code>
+        Data successfully transferred from {{ source }} to {{ destination }}
+        Number of contacts transferred: {{ contacts }}
+        Number of tags transferred: {{ tags }}
+        Number of tag categories transferred: {{ tag_categories }}
+        Number of tags applied: {{ tag_apps }}
+        Number of contact actions transferred: {{ contact_actions }}
+        Number of products transferred: {{ products }}
+        Number of campaigns transferred: 
+    </code></pre>
+{% endblock %}
