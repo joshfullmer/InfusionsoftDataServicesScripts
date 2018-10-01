@@ -1,6 +1,8 @@
 from collections import OrderedDict
 import os
 
+from file_attachment_import.file_attachment_import_2 import fai
+
 
 def clear():
     os.system('cls') if os.name == 'nt' else os.system('clear')
@@ -8,11 +10,13 @@ def clear():
 
 def menu_loop():
     clear()
-    print(main_menu())
+    service = main_menu()[1]
+    clear()
+    service()
 
 
 main_menu_options = OrderedDict({
-    'File Attachment Import': 'begin',
+    'File Attachment Import': fai,
     'File Attachment Export': 'begin',
     'Email History Import': 'begin',
     'Email History Export': 'begin',
