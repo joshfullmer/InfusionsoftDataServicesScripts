@@ -54,7 +54,7 @@ class Instance(pw.Model):
 
     @classmethod
     def update_token(cls, appname):
-        print("updating token")
+        print("Updating API access token")
         instance = Instance.get_or_none(cls.appname == appname)
         if not instance:
             raise Exception('App does not exist')
@@ -75,17 +75,20 @@ class Instance(pw.Model):
         r_json = response.json()
         instance = Instance.create_or_update(
             appname,
-            access_token=r_json.get('access_token')
+            access_token=r_json.get('access_token'),
+            refresh_token=r_json.get('refresh_token'),
         )
         return instance
 
 
 class Service(pw.Model):
-    name = pw.CharField()
+    name = pw.CharField()  # Acronym for service
     appname = pw.CharField()
-    status = pw.CharField()
-    stage = pw.CharField(null=True)
-    last_updated = pw.DateTimeField(default=dt.datetime.now())
+    status = pw.CharField(default='In Progress')  # In Progress or Complete
+
+    # last row number or record ID added
+    lastrecord = pw.IntegerField(null=True)
+    lastupdated = pw.DateTimeField(default=dt.datetime.now())
 
     class Meta:
         database = db

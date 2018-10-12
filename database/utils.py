@@ -22,7 +22,7 @@ def get_app_and_api(message):
 def get_app_and_token(message):
     print(message)
     appname = input('Appname: ')
-    instance = Instance.create_or_update(appname)
+    instance, _ = Instance.get_or_create(appname=appname)
     if instance.access_token:
         expired = instance.access_token_expiry < dt.datetime.now()
         if expired:
