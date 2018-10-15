@@ -1,7 +1,9 @@
 from collections import OrderedDict
 import os
 
-from file_attachment_import.file_attachment_import_2 import fai
+from email_history_import.email_history_import import ehi
+from file_attachment_import.file_attachment_import import fai
+from file_attachment_export.file_attachment_export import fae
 
 
 def clear():
@@ -17,8 +19,8 @@ def menu_loop():
 
 main_menu_options = OrderedDict({
     'File Attachment Import': fai,
-    'File Attachment Export': 'begin',
-    'Email History Import': 'begin',
+    'File Attachment Export': fae,
+    'Email History Import': ehi,
     'Email History Export': 'begin',
     'App Transfer to CSV': 'begin',
     'Duplicate Company Handling': 'begin',
@@ -28,6 +30,7 @@ main_menu_options = OrderedDict({
 def main_menu():
     for i, k in enumerate(main_menu_options.keys()):
         print(i+1, k)
+    print('Ctrl+C to quit\n')
     selection = input('Which data service do you need? ')
     while True:
         try:

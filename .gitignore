@@ -1,2 +1,4 @@
 testing/
 dataservices.db
+file_attachment_import/attachments/**
+file_attachment_export/attachments/**

@@ -1,82 +1,93 @@
-"""
-This application will download all of the file attachments
-connected to contacts (not emails, or company files)
-and puts all of those files into a ZIP file.
-
-The ZIP file will also have a "files.csv" which will outline
-all of the other details about the files, including who they were
-attached to, by contact ID
-
-"""
-import base64
+from base64 import b64decode
 import csv
+import datetime as dt
 import glob
 import os
-import re
+import requests
 import shutil
 import zipfile
 
-from infusionsoft.library import Infusionsoft
+from database.utils import get_app_and_token
+from database.models import Service
 
-import constants
-from infusionsoft_actions import get_table
+rest_url = 'https://api.infusionsoft.com/crm/rest/v1/files'
 
-# Initialization
-appname = 'ni204'
-api_key = 'e8be5185a415f3173a42f52dc6f4361e'
 
-infusionsoft = Infusionsoft(appname, api_key)
+def fae():
+    appname, token = get_app_and_token('Appname and Auth Code')
 
-# Get contact IDs, so we can exclude files not attached to contacts
-contact_ids = []
-for contact in get_table(infusionsoft, 'Contact', fields=['Id']):
-    contact_ids += [contact['Id']]
+    cwd = os.getcwd()
+    app_dir = cwd + '/file_attachment_export/attachments/' + appname
+    attach_dir = app_dir + '/attachments'
+    os.makedirs(attach_dir, exist_ok=True)
 
-# Get all files, then exclude those not attached to contacts
-files = []
-for file in get_table(infusionsoft, 'FileBox'):
-    if file['ContactId'] in contact_ids:
-        files += [file]
+    input(f'Exported files will be placed in the following directory:\n'
+          f'{app_dir}\n\nPress Enter to begin file export')
 
-dir_path = "output/{}_files/".format(appname)
+    service, _ = Service.get_or_create(
+        name='fae',
+        appname=appname,
+        status='In Progress'
+    )
 
-os.makedirs(dir_path, exist_ok=True)
+    headers = {"Authorization": "Bearer " + token}
 
-# Write each file's details to CSV
-with open("{}files.csv".format(dir_path), "w", newline='') as csvfile:
-    fieldnames = constants.FIELDS['FileBox']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
+    file_ids = get_file_ids(headers)
+    last_record = service.lastrecord
+    if last_record:
+        file_ids = list(filter(lambda x: x > last_record, file_ids))
+    response = requests.get(f'{rest_url}/{file_ids[0]}', headers=headers)
+    fieldnames = list(response.json().get('file_descriptor').keys())
 
-    # Iterate through each file, download it, decode it, then write it
-    for file in files:
-        file['FileName'] = re.sub(r'\/', "-", file['FileName'])
-        file_path = "{}{}_{}".format(
-            dir_path,
-            file['ContactId'],
-            file['FileName'])
+    attachment_csv = f'{app_dir}/attachment.csv'
+    csv_exists = os.path.isfile(attachment_csv)
 
-        # Skip if the file isn't supported, or if the file already exists
-        # by the same filename
-        if (file['Extension'] not in constants.SUPPORTED_FILE_TYPES and
-                os.path.isfile(file_path)):
-            continue
-        file_data = infusionsoft.FileService('getFile', file['Id'])
-        current_file = open(file_path, "wb")
-        current_file.write(base64.b64decode(file_data))
-        current_file.close()
-        writer.writerow(file)
+    # Simultaneously write file meta data to CSV and download file
+    with open(attachment_csv, 'a', newline='') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        if not csv_exists:
+            writer.writeheader()
 
-# Add all files to the zip file
-zipf = zipfile.ZipFile("output/{}_files.zip".format(appname), "w")
+        for file_id in file_ids:
+            file_url = f'{rest_url}/{file_id}?optional_properties=file_data'
+            response = requests.get(file_url, headers=headers)
+            r_json = response.json()
+            writer.writerow(r_json.get('file_descriptor'))
+            filename = r_json.get('file_descriptor').get('file_name')
+            filepath = f'{attach_dir}/{file_id}_{filename}'
+            with open(filepath, 'wb') as file:
+                file.write(b64decode(r_json.get('file_data')))
+            print(f'File ID: {file_id} exported.')
+            service.lastrecord = file_id
+            service.lastupdated = dt.datetime.now()
+            service.save()
 
-for name in glob.glob("{}*".format(dir_path)):
-    zipf.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
+    # Compress all files to ZIP
+    now = dt.datetime.now()
+    now_str = now.strftime('%Y%m%d%H%M%S')
+    file = zipfile.ZipFile(f'{app_dir}/attachments_{now_str}.zip', 'w')
+    for name in glob.glob(f'{attach_dir}/*'):
+        file.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
+    file.close()
 
-# Delete original files, leaving on the zip file
-if os.path.exists(dir_path) and os.path.isdir(dir_path):
-    shutil.rmtree(dir_path)
+    if os.path.exists(attach_dir) and os.path.isdir(attach_dir):
+        shutil.rmtree(attach_dir)
 
-print("\nThe ZIP file for the customer is in the following location:")
-print(os.path.abspath("output/{}_files.zip".format(appname)))
-print("")
+    service.status = 'Complete'
+    service.save()
+
+
+def get_file_ids(headers):
+    out = []
+    next_url = ''
+    while True:
+        response = requests.get(
+            next_url or rest_url,
+            headers=headers
+        )
+        r_json = response.json()
+        if not r_json.get('files'):
+            break
+        out += [file.get('id') for file in r_json.get('files')]
+        next_url = r_json.get('next')
+    return sorted(out)
