@@ -75,71 +75,71 @@ def ehi():
                 continue
         break
 
-        service, _ = Service.get_or_create(
-            name='ehi',
-            appname=appname,
-            status='In Progress'
-        )
+    service, _ = Service.get_or_create(
+        name='ehi',
+        appname=appname,
+        status='In Progress'
+    )
 
-        # Import email history
-        with open(csv_filename, 'r', encoding='utf-8-sig') as csv_file:
-            reader = csv.DictReader(csv_file)
+    # Import email history
+    with open(csv_filename, 'r', encoding='utf-8-sig') as csv_file:
+        reader = csv.DictReader(csv_file)
 
-            filenum = 0
-            for row in reader:
-                filenum += 1
-                if service.lastrecord and service.lastrecord >= filenum:
-                    continue
-                html_filepath = os.path.join(email_dir, row['html_content'])
-                plain_filepath = os.path.join(email_dir, row['plain_content'])
-                html_isfile = os.path.isfile(html_filepath)
-                plain_isfile = os.path.isfile(plain_filepath)
-                file_exists = html_isfile or plain_isfile
-                if not file_exists:
-                    continue
+        filenum = 0
+        for row in reader:
+            filenum += 1
+            if service.lastrecord and service.lastrecord >= filenum:
+                continue
+            html_filepath = os.path.join(email_dir, row['html_content'])
+            plain_filepath = os.path.join(email_dir, row['plain_content'])
+            html_isfile = os.path.isfile(html_filepath)
+            plain_isfile = os.path.isfile(plain_filepath)
+            file_exists = html_isfile or plain_isfile
+            if not file_exists:
+                continue
 
-                headers = {
-                    "Authorization": "Bearer " + token,
-                    "Content-Type": "application/json;charset=UTF-8",
-                    "Accept": "application/json, */*"
-                }
-                if html_isfile:
-                    file = open(html_filepath, 'rb')
-                    file_data = b64encode(file.read()).decode('ascii')
-                    file.close()
-                else:
-                    file = open(plain_filepath, 'rb')
-                    file_data = b64encode(file.read()).decode('ascii')
-                    file.close()
-                contact_id = int(row.get('contact_id'))
-                body = {
-                    'contact_id': contact_id,
-                    'headers': row.get('headers'),
-                    'html_content': file_data,
-                    'opened_date': row.get('opened_date'),
-                    'plain_content': '',
-                    'received_date': row.get('received_date'),
-                    'sent_date': row.get('sent_date'),
-                    'sent_from_address': row.get('sent_from_address'),
-                    'sent_from_reply_address': row.get(
-                        'sent_from_reply_address'
-                    ),
-                    'sent_to_address': row.get('sent_to_address'),
-                    'sent_to_bcc_addresses': row.get('sent_to_bcc_addresses'),
-                    'sent_to_cc_addresses': row.get('sent_to_cc_addresses'),
-                    'subject': row.get('subject'),
-                }
-                url = 'https://api.infusionsoft.com/crm/rest/v1/emails'
-                response = requests.post(url, headers=headers, json=body)
-                email_id = response.json().get('id')
-                if response.status_code == 200:
-                    print(f'Email #{filenum}')
-                    print(f'Contact ID: {contact_id} - Email ID: {email_id}')
-                    print(f'Email recorded!\n')
+            headers = {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json;charset=UTF-8",
+                "Accept": "application/json, */*"
+            }
+            if html_isfile:
+                file = open(html_filepath, 'rb')
+                file_data = b64encode(file.read()).decode('ascii')
+                file.close()
+            else:
+                file = open(plain_filepath, 'rb')
+                file_data = b64encode(file.read()).decode('ascii')
+                file.close()
+            contact_id = int(row.get('contact_id'))
+            body = {
+                'contact_id': contact_id,
+                'headers': row.get('headers'),
+                'html_content': file_data,
+                'opened_date': row.get('opened_date'),
+                'plain_content': '',
+                'received_date': row.get('received_date'),
+                'sent_date': row.get('sent_date'),
+                'sent_from_address': row.get('sent_from_address'),
+                'sent_from_reply_address': row.get(
+                    'sent_from_reply_address'
+                ),
+                'sent_to_address': row.get('sent_to_address'),
+                'sent_to_bcc_addresses': row.get('sent_to_bcc_addresses'),
+                'sent_to_cc_addresses': row.get('sent_to_cc_addresses'),
+                'subject': row.get('subject'),
+            }
+            url = 'https://api.infusionsoft.com/crm/rest/v1/emails'
+            response = requests.post(url, headers=headers, json=body)
+            email_id = response.json().get('id')
+            if response.status_code == 200:
+                print(f'Email #{filenum}')
+                print(f'Contact ID: {contact_id} - Email ID: {email_id}')
+                print(f'Email recorded!\n')
 
-                service.lastrecord = filenum
-                service.lastupdated = dt.datetime.now()
-                service.save()
+            service.lastrecord = filenum
+            service.lastupdated = dt.datetime.now()
+            service.save()
 
     service.status = 'Complete'
     service.save()

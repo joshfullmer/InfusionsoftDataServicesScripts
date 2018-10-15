@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import os
 
+from email_history_export.email_history_export2 import ehe
 from email_history_import.email_history_import import ehi
 from file_attachment_import.file_attachment_import import fai
 from file_attachment_export.file_attachment_export import fae
@@ -21,7 +22,7 @@ main_menu_options = OrderedDict({
     'File Attachment Import': fai,
     'File Attachment Export': fae,
     'Email History Import': ehi,
-    'Email History Export': 'begin',
+    'Email History Export': ehe,
     'App Transfer to CSV': 'begin',
     'Duplicate Company Handling': 'begin',
 })

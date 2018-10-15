@@ -1,4 +1,6 @@
 testing/
 dataservices.db
+email_history_import/emails/**
+email_history_export/emails/**
 file_attachment_import/attachments/**
 file_attachment_export/attachments/**
