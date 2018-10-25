@@ -1,54 +1,103 @@
-"""
-This program exports all email history items and puts them into a zipfile
-that's found in the '/output' folder.
-
-"""
-
-from file_ids import FILE_IDS
-
-from infusionsoft.library import Infusionsoft
-
-import zipfile
+from base64 import b64decode
+import csv
+import datetime as dt
 import glob
-import base64
 import os
+import requests
 import shutil
+import zipfile
 
-# Initiation
-appname = 'aps'
-api_key = '009d934d1ce9ce27de31278901a360ff'
+from database.models import Service
+from database.utils import get_app_and_token
 
-infusionsoft = Infusionsoft(appname, api_key)
+rest_url = 'https://api.infusionsoft.com/crm/rest/v1/emails'
 
-file_path = "output/{}_emails/".format(appname)
 
-os.makedirs(file_path, exist_ok=True)
+def ehe():
+    appname, token = get_app_and_token('Appname and Auth Code')
 
-# Gets all files from FileBox that have been given through the SQL
-# query from above, and writes all of the files individually
-for id in FILE_IDS:
-    file = open("output/{}_emails/email_{}.html".format(appname, id), "w")
+    cwd = os.getcwd()
+    app_dir = cwd + '/email_history_export/emails/' + appname
+    email_dir = app_dir + '/emails'
+    os.makedirs(email_dir, exist_ok=True)
 
-    string = infusionsoft.FileService('getFile', id)
+    input(f'Exported emails will be placed in the following directory:\n'
+          f'{app_dir}\n\nPress Enter to begin the email export')
 
-    if isinstance(string, tuple):
-        if string[0] == 'ERROR':
-            print(string[1])
-            break
+    service, _ = Service.get_or_create(
+        name='ehe',
+        appname=appname,
+        status='In Progress'
+    )
 
-    file.write(base64.b64decode(string).decode('utf-8'))
+    headers = {"Authorization": "Bearer " + token}
 
+    email_ids = get_email_ids(headers)
+    lastrecord = service.lastrecord
+    if lastrecord:
+        email_ids = list(filter(lambda x: x > lastrecord, email_ids))
+    response = requests.get(f'{rest_url}/{email_ids[0]}', headers=headers)
+    r_json = response.json()
+    fieldnames = list(r_json.keys())
+
+    email_csv = f'{app_dir}/email.csv'
+    csv_exists = os.path.isfile(email_csv)
+
+    # Simultaneously write email meta data to CSV and download email
+    with open(email_csv, 'a', newline='') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        if not csv_exists:
+            writer.writeheader()
+
+        email_count = 0
+        total_emails = len(email_ids)
+        durations = []
+        for email_id in email_ids:
+            start = dt.datetime.now()
+            email_url = f'{rest_url}/{email_id}'
+            response = requests.get(email_url, headers=headers)
+            r_json = response.json()
+            html_content = r_json.pop('html_content', None)
+            writer.writerow(r_json)
+            filepath = f'{email_dir}/{email_id}.html'
+            with open(filepath, 'wb') as file:
+                file.write(b64decode(html_content))
+            email_count += 1
+            print(f'Email ID: {email_id} exported.')
+            print(f'Email #{email_count} of {total_emails}')
+            service.lastrecord = email_id
+            service.lastupdated = dt.datetime.now()
+            service.save()
+            durations += [dt.datetime.now() - start]
+            average_duration = sum(durations, dt.timedelta(0)) / len(durations)
+            erd = average_duration * (total_emails - email_count)
+            etc = dt.datetime.now() + erd
+            print(f'Estimated remaining duration: {erd}')
+            print(f'Estimated time of completion: {etc}\n')
+
+    now = dt.datetime.now()
+    print(f'Completed on: {now}')
+    now_str = now.strftime('%Y%m%d%H%M%S')
+    file = zipfile.ZipFile(f'{app_dir}/emails_{now_str}.zip', 'w')
+    for name in glob.glob(f'{email_dir}/*'):
+        file.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
     file.close()
 
-    print("This is the current File ID: {}".format(id))
+    if os.path.exists(email_dir) and os.path.isdir(email_dir):
+        shutil.rmtree(email_dir)
 
-# Adds all emails to a ZIP file
-file = zipfile.ZipFile("output/{}_emails.zip".format(appname), "w")
+    service.status = 'Complete'
+    service.save()
 
-for name in glob.glob("output/{}_emails/*".format(appname)):
-    file.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
 
-# Deletes the individual email files, leaving only the ZIP as output
-dirpath = os.path.join("output", "{}_emails".format(appname))
-if os.path.exists(dirpath) and os.path.isdir(dirpath):
-    shutil.rmtree(dirpath)
+def get_email_ids(headers):
+    out = []
+    next_url = ''
+    while True:
+        response = requests.get(next_url or rest_url, headers=headers)
+        r_json = response.json()
+        if not r_json.get('emails'):
+            break
+        out += [email.get('id') for email in r_json.get('emails')]
+        next_url = r_json.get('next')
+    return sorted(out)
