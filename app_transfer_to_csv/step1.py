@@ -48,19 +48,23 @@ if config.CONTACTS:
             contact_fields += ["_{}".format(custom_field['Name'])]
 
     # Generates query criteria if there are tags to limit the transfer
-    query = {}
+    contact_ids = []
     if config.CONTACTS_WITH_TAG_IDS:
-        contact_ids = []
         for tag in get_table(src_infusionsoft,
                              'ContactGroupAssign',
                              {},
                              ['ContactId', 'GroupId']):
             if tag['GroupId'] in config.CONTACTS_WITH_TAG_IDS:
                 contact_ids += [tag['ContactId']]
-        query['Id'] = list(set(contact_ids))
+        contact_ids = set(contact_ids)
 
     # Gets Source Contacts
-    contacts = get_table(src_infusionsoft, 'Contact', query, contact_fields)
+    print(contact_fields)
+    all_contacts = get_table(src_infusionsoft, 'Contact', {}, contact_fields)
+    contacts = []
+    for contact in all_contacts:
+        if contact.get('Id') in contact_ids:
+            contacts.append(contact)
 
     # Limit the custom fields to create to only those fields that have data
     fields_with_data = set().union(*(contact.keys() for contact in contacts))
