@@ -50,6 +50,8 @@ def adt():
 
     # TODO Transfer notes
 
+    # TODO Transfer tasks
+
 
 def create_rest_id_custom_field(fieldname, headers):
     ext = '/contacts/model'
