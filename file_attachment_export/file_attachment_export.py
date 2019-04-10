@@ -32,11 +32,16 @@ def fae():
 
     headers = {"Authorization": "Bearer " + token}
 
-    file_ids = get_file_ids(headers)
+    # file_ids = get_file_ids(headers)
+    file_ids = sorted([])
     last_record = service.lastrecord
     if last_record:
         file_ids = list(filter(lambda x: x > last_record, file_ids))
-    response = requests.get(f'{rest_url}/{file_ids[0]}', headers=headers)
+
+    # Handle fieldnames
+    response = requests.get(f'{rest_url}', headers=headers)
+    first_id = response.json().get('files')[0].get('id')
+    response = requests.get(f'{rest_url}/{first_id}', headers=headers)
     fieldnames = list(response.json().get('file_descriptor').keys())
 
     attachment_csv = f'{app_dir}/attachment.csv'
@@ -52,6 +57,13 @@ def fae():
             file_url = f'{rest_url}/{file_id}?optional_properties=file_data'
             response = requests.get(file_url, headers=headers)
             r_json = response.json()
+            if r_json.get('message'):
+                if r_json['message'] == 'User does not have permission to view this File':
+                    print(f'Skipping File ID: {file_id}')
+                else:
+                    print(
+                        f'File ID {file_id} encountered error: ' + r_json['message'])
+                continue
             writer.writerow(r_json.get('file_descriptor'))
             filename = r_json.get('file_descriptor').get('file_name')
             filepath = f'{attach_dir}/{file_id}_{filename}'

@@ -107,6 +107,9 @@ def fai():
             }
             url = 'https://api.infusionsoft.com/crm/rest/v1/files'
             resp = requests.post(url, headers=headers, json=body)
+            print(resp.text)
+            if resp.json().get('message'):
+                print(resp.json())
             file_id = resp.json().get('file_descriptor').get('id')
             if resp.status_code == 200:
                 print(f'File #{filenum}')

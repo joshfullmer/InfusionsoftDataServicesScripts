@@ -31,7 +31,7 @@ def strip_company(string):
 
 
 start = datetime.datetime.now()
-df = pd.read_csv('hr493_company.csv')
+df = pd.read_csv('hk477_company.csv')
 df = df.dropna()
 rows_list = []
 for index, row in df.iterrows():

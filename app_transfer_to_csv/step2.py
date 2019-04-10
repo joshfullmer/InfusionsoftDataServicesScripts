@@ -284,7 +284,7 @@ if config.OPPORTUNITIES:
 
 if config.ORDERS:
     src_order_id = create_custom_field(dest_infusionsoft,
-                                       'Source App Order ID'
+                                       'Source App Order ID',
                                        'Job')['Name']
 
     order_custom_fields = get_table(src_infusionsoft,

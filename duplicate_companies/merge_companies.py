@@ -5,14 +5,14 @@ import pandas as pd
 from constants import FIELDS
 from infusionsoft_actions import get_table
 
-APPNAME = 'xi445'
-API_KEY = 'ea12ee116390ecda5543ac8f44c0913f'
-ACCESS_TOKEN = 'z3sfk68fqrynjr33dwbewghq'
+APPNAME = 'hk477'
+API_KEY = '7e3e6381bcf8bf37a65191e2ad0257b37bf04cc974444c98e52712a1afdd3e4e'
+# ACCESS_TOKEN = 'z3sfk68fqrynjr33dwbewghq'
 
-# ifs = Infusionsoft(APPNAME, API_KEY)
-ifs = InfusionsoftOAuth(ACCESS_TOKEN)
+ifs = Infusionsoft(APPNAME, API_KEY)
+# ifs = InfusionsoftOAuth(ACCESS_TOKEN)
 
-df = pd.read_csv('duplicate_companies_coalmarch.csv')
+df = pd.read_csv('duplicate_companies (exact).csv')
 df = df.dropna()
 
 company_fields = FIELDS['Company'][:]

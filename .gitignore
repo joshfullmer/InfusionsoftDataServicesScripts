@@ -5,3 +5,5 @@ email_history_export/emails/**
 file_attachment_import/attachments/**
 file_attachment_export/attachments/**
 errors.csv
+Pipfile.lock
+__pycache__/
