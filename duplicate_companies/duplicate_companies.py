@@ -31,7 +31,7 @@ def strip_company(string):
 
 
 start = datetime.datetime.now()
-df = pd.read_csv('hk477_company.csv')
+df = pd.read_csv('company_export.csv')
 df = df.dropna()
 rows_list = []
 for index, row in df.iterrows():
@@ -41,28 +41,28 @@ for index, row in df.iterrows():
 
     # Get only the companies that have the same first 3 characters
     # This aids in cutting down the overall performance
-    matches = df[df.Name.str.startswith(row.Name[0:3])].copy()
+    matches = df[df.Company.str.startswith(row.Company[0:3])].copy()
 
     # Remove the current row from the matches
     matches.drop(index, inplace=True)
     if not matches.empty:
         # Adds Jaro-Winkler distance as new column
         matches['Similarity'] = matches.apply(
-            lambda x: get_jw_similarity(x.Name, row.Name), axis=1)
+            lambda x: get_jw_similarity(x.Company, row.Company), axis=1)
 
         for index2, row2 in matches.iterrows():
             # Threshold check for company name similarity
             if row2.Similarity >= 0.925:
-                flip_dix = {'Id1': row2.ID,
-                            'Id2': row.ID,
-                            'Name1': row2.Name,
-                            'Name2': row.Name}
+                flip_dix = {'orig_id': row2.Id,
+                            'dupe_id': row.Id,
+                            'Name1': row2.Company,
+                            'Name2': row.Company}
                 # Checks if the mirror exists in the list of dicts
                 if flip_dix not in rows_list:
-                    dix = {'Id1': row.ID,
-                           'Id2': row2.ID,
-                           'Name1': row.Name,
-                           'Name2': row2.Name}
+                    dix = {'orig_id': row.Id,
+                           'dupe_id': row2.Id,
+                           'Name1': row.Company,
+                           'Name2': row2.Company}
                     rows_list.append(dix)
 
 output = pd.DataFrame(rows_list)
