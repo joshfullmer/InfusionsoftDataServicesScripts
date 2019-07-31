@@ -1,4 +1,5 @@
 testing/
+.vscode/
 dataservices.db
 email_history_import/emails/**
 email_history_export/emails/**
