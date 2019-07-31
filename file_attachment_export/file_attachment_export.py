@@ -32,8 +32,7 @@ def fae():
 
     headers = {"Authorization": "Bearer " + token}
 
-    # file_ids = get_file_ids(headers)
-    file_ids = sorted([])
+    file_ids = get_file_ids(headers)
     last_record = service.lastrecord
     if last_record:
         file_ids = list(filter(lambda x: x > last_record, file_ids))
