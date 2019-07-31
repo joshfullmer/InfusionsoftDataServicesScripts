@@ -66,8 +66,12 @@ def fae():
             writer.writerow(r_json.get('file_descriptor'))
             filename = r_json.get('file_descriptor').get('file_name')
             filepath = f'{attach_dir}/{file_id}_{filename}'
-            with open(filepath, 'wb') as file:
-                file.write(b64decode(r_json.get('file_data')))
+            try:
+                with open(filepath, 'wb') as file:
+                    file.write(b64decode(r_json.get('file_data')))
+            except:
+                with open(f'{attach_dir}/{file_id}', 'wb') as file:
+                    file.write(b64decode(r_json.get('file_data')))
             print(f'File ID: {file_id} exported.')
             service.lastrecord = file_id
             service.lastupdated = dt.datetime.now()
