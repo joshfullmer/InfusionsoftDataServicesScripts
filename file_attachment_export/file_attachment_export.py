@@ -6,6 +6,7 @@ import os
 import requests
 import shutil
 import zipfile
+import re
 
 from database.utils import get_app_and_token
 from database.models import Service
@@ -63,6 +64,14 @@ def fae():
                     print(
                         f'File ID {file_id} encountered error: ' + r_json['message'])
                 continue
+            has502 = re.search(r'502', str(response))
+            if has502:
+                if has502:
+                    print(f'Skipping File ID: {file_id}')
+                else:
+                    print(f'File ID {file_id} encountered error: ' + r_json['message'])
+                continue
+
             writer.writerow(r_json.get('file_descriptor'))
             filename = r_json.get('file_descriptor').get('file_name')
             filepath = f'{attach_dir}/{file_id}_{filename}'
