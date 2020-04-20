@@ -8,3 +8,5 @@ file_attachment_export/attachments/**
 errors.csv
 Pipfile.lock
 __pycache__/
+*.pyc
+.DS_STORE

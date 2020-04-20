@@ -1,21 +1,48 @@
 from base64 import b64decode
 import csv
 import datetime as dt
-import json
 import glob
 import os
 import requests
 import shutil
 import zipfile
+from multiprocessing.pool import ThreadPool
 import pandas as pd
 
 from database.models import Service
 from database.utils import get_app_and_token
 
 rest_url = 'https://api.infusionsoft.com/crm/rest/v1/emails'
+headers=''
+email_dir = ''
+email_count = 0
+total_emails = 0
+
+service = None
+writer = None
+
+def download_email_by_id(email_id):
+    email_url = f'{rest_url}/{email_id}'
+    response = requests.get(email_url, headers=headers)
+    print(response)
+    r_json = response.json()
+    html_content = r_json.pop('html_content', None)
+    writer.writerow(r_json)
+    filepath = f'{email_dir}/{email_id}.html'
+    with open(filepath, 'wb') as file:
+        print(html_content)
+        file.write(b64decode(html_content))
+    # email_count += 1
+    print(f'Email ID: {email_id} exported.')
+    print(f'Email #{email_count} of {total_emails}')
+    service.lastrecord = email_id
+    service.lastupdated = dt.datetime.now()
+    service.save()
+    
+    return email_id
 
 
-def ehe():
+def tehe():
     appname, token = get_app_and_token('Appname and Auth Code')
 
     cwd = os.getcwd()
@@ -34,32 +61,31 @@ def ehe():
 
     headers = {"Authorization": "Bearer " + token}
 
-    print("checking for email_ids.csv file...")
+    print("getting email Ids...")
     # handle persistence or retrieval of known email IDs 
     email_id_csv = f'{app_dir}/email_ids.csv'
     email_file_exists = os.path.isfile(email_id_csv)
     
     if (email_file_exists):
-        print("found email_ids.csv")
         # file exists, so get the email IDs
         email_id_df = pd.read_csv(email_id_csv)
-        # email_id_df = email_id_df[email_id_df["Downloaded"] == 0]
-        email_ids = email_id_df["EmailId"].tolist()
+        email_id_df = email_id_df[email_id_df["Downloaded"] == 0]
+        email_ids = email_id_df["EmailID"].tolist()
     else:
         # get IDs via REST
-        print("File not found, retrieving from API")
         email_ids = get_email_ids(headers)
 
         # persist email ID data in CSV
         out_df = pd.DataFrame({
-                "EmailId": email_ids,
-#               "Downloaded": []
+                "EmailID": email_ids,
+                "Downloaded": []
             }
-        ) # email_ids, columns=["Id, Downloaded"])
-#       out_df["Downloaded"].values[:] = 0 # init downloaded column to all 0
+        ) # email_ids, columns=["EmailID, Downloaded"])
+        out_df["Downloaded"].values[:] = 0 # init downloaded column to all 0
         out_df.to_csv(email_id_csv, index=False)
     print(email_ids[:20])
     input("Press enter.")
+    
     print("got {} emails".format(len(email_ids)))
 
     lastrecord = service.lastrecord
@@ -79,45 +105,34 @@ def ehe():
         if not csv_exists:
             writer.writeheader()
 
-        email_count = 0
+        # email_count = 0
         total_emails = len(email_ids)
-        durations = []
-        for email_id in email_ids:
-            # start = dt.datetime.now()
-            email_url = f'{rest_url}/{email_id}'
-            response = requests.get(email_url, headers=headers)
-            try:
-                r_json = response.json() # raise JSONDecodeError("Expecting value", s, err.value) from None json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
-                html_content = r_json.pop('html_content', None)
-                print(email_id)
-                if 'message' in r_json:
-                    print(r_json)
-                else:
-                    writer.writerow(r_json) # NOTE: ValueError: dict contains fields not in fieldnames: 'message'
-            except json.decoder.JSONDecodeError:
-                html_content = "<p>error with HTML</p>"
-                print(f"Error with parsing JSON of EmailID: {email_id}")
-
-            filepath = f'{email_dir}/{email_id}.html'
-
-            try:
-                with open(filepath, 'wb') as file:
-                    file.write(b64decode(html_content))
-                print(f'Email ID: {email_id} exported.')
-            except TypeError:
-                print(f'EmailID: {email_id} failed')
+        # durations = []
+        for email in ThreadPool(10).imap_unordered(download_email_by_id, email_ids):
+            print(email)
+        # for email_id in email_ids:
             
-            email_count += 1
-            print(f'Email #{email_count} of {total_emails}')
-            service.lastrecord = email_id
-            service.lastupdated = dt.datetime.now()
-            service.save()
-            # durations += [dt.datetime.now() - start]
-            # average_duration = sum(durations, dt.timedelta(0)) / len(durations)
-            # erd = average_duration * (total_emails - email_count)
-            # etc = dt.datetime.now() + erd
-            # print(f'Estimated remaining duration: {erd}')
-            # print(f'Estimated time of completion: {etc}\n')
+        #     # start = dt.datetime.now()
+        #     email_url = f'{rest_url}/{email_id}'
+        #     response = requests.get(email_url, headers=headers)
+        #     r_json = response.json()
+        #     html_content = r_json.pop('html_content', None)
+        #     writer.writerow(r_json)
+        #     filepath = f'{email_dir}/{email_id}.html'
+        #     with open(filepath, 'wb') as file:
+        #         file.write(b64decode(html_content))
+        #     email_count += 1
+        #     print(f'Email ID: {email_id} exported.')
+        #     print(f'Email #{email_count} of {total_emails}')
+        #     service.lastrecord = email_id
+        #     service.lastupdated = dt.datetime.now()
+        #     service.save()
+        #     # durations += [dt.datetime.now() - start]
+        #     # average_duration = sum(durations, dt.timedelta(0)) / len(durations)
+        #     # erd = average_duration * (total_emails - email_count)
+        #     # etc = dt.datetime.now() + erd
+        #     # print(f'Estimated remaining duration: {erd}')
+        #     # print(f'Estimated time of completion: {etc}\n')
 
     now = dt.datetime.now()
     print(f'Completed on: {now}')

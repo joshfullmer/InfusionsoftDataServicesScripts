@@ -3,6 +3,7 @@ import os
 
 from app_transfer_to_csv.app_data_transfer import adt
 from email_history_export.email_history_export import ehe
+from email_history_export.threaded_email_history_export import tehe
 from email_history_import.email_history_import import ehi
 from file_attachment_import.file_attachment_import import fai
 from file_attachment_export.file_attachment_export import fae
@@ -24,6 +25,7 @@ main_menu_options = OrderedDict({
     'File Attachment Export': fae,
     'Email History Import': ehi,
     'Email History Export': ehe,
+    'Threaded Email History Export': tehe,
     'App Transfer to CSV': adt,
     'Duplicate Company Handling': 'begin',
 })

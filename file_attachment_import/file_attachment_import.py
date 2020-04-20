@@ -98,15 +98,18 @@ def fai():
             file.close()
             contact_id = int(row['id'])
             filename = row['filename']
+            print(f'Filename: {filename}')
             body = {
                 'file_name': filename,
                 'file_data': file_data,
-                'contact_id': contact_id,
+                # 'contact_id': contact_id,
                 'is_public': True,
-                'file_association': 'CONTACT',
+                'file_association': 'COMPANY',
             }
             url = 'https://api.infusionsoft.com/crm/rest/v1/files'
+            
             resp = requests.post(url, headers=headers, json=body)
+            # print(resp)
             print(resp.text)
             if resp.json().get('message'):
                 print(resp.json())
