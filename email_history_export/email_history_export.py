@@ -58,6 +58,9 @@ def ehe():
             response = requests.get(email_url, headers=headers)
             r_json = response.json()
             html_content = r_json.pop('html_content', None)
+            for element in r_json:
+                if 'html_content' in element:
+                    del element['html_content']
             writer.writerow(r_json)
             filepath = f'{email_dir}/{email_id}.html'
             with open(filepath, 'wb') as file:
