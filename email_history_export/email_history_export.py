@@ -60,11 +60,13 @@ def ehe():
         out_df.to_csv(email_id_csv, index=False)
     print(email_ids[:20])
     input("Press enter.")
-    print("got {} emails".format(len(email_ids)))
 
     lastrecord = service.lastrecord
+    print(f"Got {len(email_ids)} emails, currently on {lastrecord}")
     if lastrecord:
         email_ids = list(filter(lambda x: x > lastrecord, email_ids))
+    print(f'Get Request:\n')
+    print(f'{rest_url}/{email_ids[0]}\nHeaders:\n{headers}\n\n')
     response = requests.get(f'{rest_url}/{email_ids[0]}', headers=headers)
     print("response: ", response)
     r_json = response.json()

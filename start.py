@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import os
 
-from app_transfer_to_csv.app_data_transfer import adt
+# from app_transfer_to_csv.app_data_transfer import adt
 from email_history_export.email_history_export import ehe
 from email_history_export.threaded_email_history_export import tehe
 from email_history_import.email_history_import import ehi
@@ -26,7 +26,7 @@ main_menu_options = OrderedDict({
     'Email History Import': ehi,
     'Email History Export': ehe,
     'Threaded Email History Export': tehe,
-    'App Transfer to CSV': adt,
+#    'App Transfer to CSV': adt,
     'Duplicate Company Handling': 'begin',
 })
 
