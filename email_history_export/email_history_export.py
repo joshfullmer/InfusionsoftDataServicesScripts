@@ -99,6 +99,9 @@ def ehe():
             except json.decoder.JSONDecodeError:
                 html_content = "<p>error with HTML</p>"
                 print(f"Error with parsing JSON of EmailID: {email_id}")
+            except ValueError:
+                print(f"dict contains fields not in fieldnames for EmailID: {email_id}")
+                print(r_json)
 
             filepath = f'{email_dir}/{email_id}.html'
 
