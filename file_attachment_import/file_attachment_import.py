@@ -17,8 +17,8 @@ def fai():
     appname, token = get_app_and_token('Appname and Auth Code')
     # clear()
     cwd = os.getcwd()
-    app_dir = cwd + '/file_attachment_import/attachments/' + appname
-    attach_dir = app_dir + '/attachments'
+    app_dir = cwd + '\\file_attachment_import\\attachments\\' + appname
+    attach_dir = app_dir + '\\attachments'
     os.makedirs(attach_dir, exist_ok=True)
     input(f'Put the folder and CSV into the following directory:\n'
           f'{app_dir}\n\nPress Enter when the files have been moved.')
@@ -33,7 +33,7 @@ def fai():
         if file_count <= 0:
             q = input(f'Please upload files to the \'attachments\' folder in'
                       f'the appropriate application folder: attachments/'
-                      f'{appname}/attachments\nEnter q to quit')
+                      f'{appname}\\attachments\nEnter q to quit')
             if q.lower() == 'q':
                 break
             else:
@@ -45,7 +45,7 @@ def fai():
                         csv_filename = f.name
         if not csv_filename:
             q = input(f'Please upload the CSV to the \'{appname}\' folder in'
-                      f'the appropriate application folder: attachments/'
+                      f'the appropriate application folder: attachments\\'
                       f'{appname}\nEnter q to quit')
             if q.lower() == 'q':
                 break
@@ -79,6 +79,7 @@ def fai():
         for row in reader:
             filenum += 1
             if service.lastrecord and service.lastrecord >= filenum:
+                #print(service.lastrecord)
                 continue
             filepath = os.path.join(attach_dir, row['filepath'])
             skip = ((not os.path.isfile(filepath)) or
@@ -86,6 +87,7 @@ def fai():
                     (row.get('extension') is None) or
                     (row['extension'] == '') or
                     (row['extension'].lower() not in SUPPORTED_FILE_TYPES))
+            #print(skip)
             if skip:
                 continue
             headers = {
@@ -97,30 +99,33 @@ def fai():
             file_data = b64encode(file.read()).decode('ascii')
             file.close()
             contact_id = int(row['id'])
+            #print(contact_id)
             filename = row['filename']
             print(f'Filename: {filename}')
             body = {
                 'file_name': filename,
                 'file_data': file_data,
-                # 'contact_id': contact_id,
+                'contact_id': contact_id,
                 'is_public': True,
-                'file_association': 'COMPANY',
+                'file_association': 'CONTACT',
             }
             url = 'https://api.infusionsoft.com/crm/rest/v1/files'
             
-            resp = requests.post(url, headers=headers, json=body)
-            # print(resp)
-            print(resp.text)
-            if resp.json().get('message'):
-                print(resp.json())
-            file_id = resp.json().get('file_descriptor').get('id')
-            if resp.status_code == 200:
-                print(f'File #{filenum}')
-                print(f'{filepath} - {os.path.isfile(filepath)}')
-                print(f'Filesize in MB: {os.path.getsize(filepath)/2**20}')
-                print(f'{contact_id}: {filename}')
-                print(f'File uploaded! FileBoxId: {file_id}\n')
-
+            try:
+                resp = requests.post(url, headers=headers, json=body)
+                # print(resp)
+                print(resp.text)
+                if resp.json().get('message'):
+                    print(resp.json())
+                file_id = resp.json().get('file_descriptor').get('id')
+                if resp.status_code == 200:
+                    print(f'File #{filenum}')
+                    print(f'{filepath} - {os.path.isfile(filepath)}')
+                    print(f'Filesize in MB: {os.path.getsize(filepath)/2**20}')
+                    print(f'{contact_id}: {filename}')
+                    print(f'File uploaded! FileBoxId: {file_id}\n')
+            except Exception as e:
+                print("!!ERROR ON ID: {}".format(filename))
             service.lastrecord = filenum
             service.lastupdated = dt.datetime.now()
             service.save()
@@ -128,7 +133,7 @@ def fai():
     service.status = 'Complete'
     service.save()
 
-    print('File Attachment Import Complete!')
+    print('File Attachment Import Complete!') 
 
 
 if __name__ == '__main__':
