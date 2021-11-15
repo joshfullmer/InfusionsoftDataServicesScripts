@@ -40,10 +40,12 @@ def fae():
 
     # Handle fieldnames
     response = requests.get(f'{rest_url}', headers=headers)
+    #print(response)
     first_id = response.json().get('files')[0].get('id')
     response = requests.get(f'{rest_url}/{first_id}', headers=headers)
+    #print(response)
     fieldnames = list(response.json().get('file_descriptor').keys())
-
+    #print(fieldnames)
     attachment_csv = f'{app_dir}/attachment.csv'
     csv_exists = os.path.isfile(attachment_csv)
 
@@ -57,6 +59,7 @@ def fae():
             file_url = f'{rest_url}/{file_id}?optional_properties=file_data'
             response = requests.get(file_url, headers=headers)
             r_json = response.json()
+            
             if r_json.get('message'):
                 if r_json['message'] == 'User does not have permission to view this File':
                     print(f'Skipping File ID: {file_id}')
@@ -71,7 +74,17 @@ def fae():
                 else:
                     print(f'File ID {file_id} encountered error: ' + r_json['message'])
                 continue
-
+            #print(r_json.get('file_descriptor').get('id'))
+            badid = r_json.get('file_descriptor').get('id')
+            badidlist = []
+            if badid in badidlist:
+                if badid in badidlist:
+                    print(f'Skipping File ID: {file_id}')
+                else:
+                    print(f'File ID {file_id} encountered error: ' + r_json['message'])
+                continue
+            #print(r_json.get('file_descriptor'))
+            #print(r_json.get('file_descriptor').get('file_name'))
             writer.writerow(r_json.get('file_descriptor'))
             filename = r_json.get('file_descriptor').get('file_name')
             filepath = f'{attach_dir}/{file_id}_{filename}'
