@@ -89,6 +89,19 @@ def fai():
                     (row['extension'].lower() not in SUPPORTED_FILE_TYPES))
             #print(skip)
             if skip:
+                reason = ""
+
+                if (not os.path.isfile(filepath)):
+                    reason = "file doesn't exist"
+                if (os.path.getsize(filepath)/2**20 > 9.5):
+                    reason = "file too big"
+                if (row.get('extension') is None) or (row['extension'] == ''):
+                    reason = "no file extension"
+                if (row['extension'].lower() not in SUPPORTED_FILE_TYPES):
+                    reason = f"filetype '{row['extension']}' not supported"
+
+                print("skipping: " + str(filenum) + " due to the following reason:")
+                print(reason)
                 continue
             headers = {
                 "Authorization": "Bearer " + token,
@@ -105,9 +118,10 @@ def fai():
             body = {
                 'file_name': filename,
                 'file_data': file_data,
-                'contact_id': contact_id,
+
+                # 'contact_id': 0, # contact_id,
                 'is_public': True,
-                'file_association': 'CONTACT',
+                'file_association': 'COMPANY', # 'CONTACT',
             }
             url = 'https://api.infusionsoft.com/crm/rest/v1/files'
             

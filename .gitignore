@@ -1,6 +1,6 @@
 testing/
 .vscode/
-dataservices.db
+dataservices*.db
 email_history_import/emails/**
 email_history_export/emails/**
 file_attachment_import/attachments/**
