@@ -39,10 +39,20 @@ def fae():
         file_ids = list(filter(lambda x: x > last_record, file_ids))
 
     # Handle fieldnames
-    response = requests.get(f'{rest_url}', headers=headers)
-    first_id = response.json().get('files')[0].get('id')
-    response = requests.get(f'{rest_url}/{first_id}', headers=headers)
-    fieldnames = list(response.json().get('file_descriptor').keys())
+    print(f'Requesting {rest_url}')
+    response1 = requests.get(f'{rest_url}', headers=headers)
+    print(response1.json().get('files')[0])
+    print(len(response1.json().get('files')))
+    first_id = response1.json().get('files')[0].get('id')
+    response2 = requests.get(f'{rest_url}/{first_id}', headers=headers)
+    print(response2.json())
+    if response2.json().get('message') == 'General error':
+        print('General error encountered with first file, trying next.')
+        print(response1.json().get('files')[1])
+        first_id = response1.json().get('files')[1].get('id')
+        response2 = requests.get(f'{rest_url}/{first_id}', headers=headers)
+        print(response2.json())
+    fieldnames = list(response2.json().get('file_descriptor').keys())
 
     attachment_csv = f'{app_dir}/attachment.csv'
     csv_exists = os.path.isfile(attachment_csv)
@@ -102,6 +112,7 @@ def fae():
 
 
 def get_file_ids(headers):
+    print(f'Getting File IDs from API')
     out = []
     next_url = ''
     while True:

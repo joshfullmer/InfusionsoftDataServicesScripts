@@ -96,9 +96,15 @@ def ehe():
                     print(r_json)
                 else:
                     writer.writerow(r_json) # NOTE: ValueError: dict contains fields not in fieldnames: 'message'
+                    # NOTE: seems to be caused by token expiration as well
+                    # dict contains fields not in fieldnames for EmailID: 563113
+                    # FIXME: {'fault': {'faultstring': 'Access Token expired', 'detail': {'errorcode': 'keymanagement.service.access_token_expired'}}}
             except json.decoder.JSONDecodeError:
                 html_content = "<p>error with HTML</p>"
                 print(f"Error with parsing JSON of EmailID: {email_id}")
+            except ValueError:
+                print(f"dict contains fields not in fieldnames for EmailID: {email_id}")
+                print(r_json)
 
             filepath = f'{email_dir}/{email_id}.html'
 
@@ -107,7 +113,7 @@ def ehe():
                     file.write(b64decode(html_content))
                 print(f'Email ID: {email_id} exported.')
             except TypeError:
-                print(f'EmailID: {email_id} failed')
+                print(f'EmailID: {email_id} failed due to TypeError')
             
             email_count += 1
             print(f'Email #{email_count} of {total_emails}')
@@ -136,7 +142,7 @@ def ehe():
     service.save()
 
 
-def get_email_ids(headers):  # TODO: add a start_at param to handle
+def get_email_ids(headers):  # TODO: add a start_at param to handle interrupts
     out = []
     next_url = ''
     retrieved = 0
@@ -148,5 +154,4 @@ def get_email_ids(headers):  # TODO: add a start_at param to handle
         out += [email.get('id') for email in r_json.get('emails')]
         next_url = r_json.get('next')
         retrieved += 1
-        print(retrieved)
     return sorted(out)
