@@ -88,6 +88,7 @@ def ehe():
             # start = dt.datetime.now()
             email_url = f'{rest_url}/{email_id}'
             response = requests.get(email_url, headers=headers)
+
             try:
                 r_json = response.json() # raise JSONDecodeError("Expecting value", s, err.value) from None json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
                 html_content = r_json.pop('html_content', None)
