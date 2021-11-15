@@ -79,7 +79,6 @@ if config.TAGS:
                          'ContactGroupAssign',
                          {},
                          ['ContactId', 'GroupId', 'Contact.CompanyID'])
-
     with open("{}tags_for_contacts.csv".format(dir_path),
               'w', newline='') as csvfile:
         fieldnames = ['ContactId', 'GroupId']
@@ -121,7 +120,7 @@ if config.NOTES:
             break
         existing_notes += [int(note[src_action_id])]
 
-    with open("{}notes.csv".format(dir_path), 'w', newline='') as csvfile:
+    with open("{}notes.csv".format(dir_path), 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = list(set().union(*(d.keys() for d in notes)))
         fieldnames += [src_action_id]
         writer = csv.DictWriter(csvfile,
@@ -194,7 +193,7 @@ if config.TASKS_APPOINTMENTS:
 
     with open("{}tasks_appointments.csv".format(dir_path),
               'w',
-              newline='') as csvfile:
+              newline='', encoding='utf-8') as csvfile:
         fieldnames = list(set().union(*(d.keys() for d in actions)))
         fieldnames += [src_action_id]
         writer = csv.DictWriter(csvfile,
